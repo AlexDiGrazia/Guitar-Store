@@ -1,0 +1,88 @@
+.background {
+  width: 677px;
+  height: 575px;
+  background-color: #5d5d5d;
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 5px;
+}
+
+.inputBaseClass,
+.expiry {
+  margin-bottom: 20px;
+}
+
+.noMarginBottom {
+  margin-bottom: 0;
+}
+
+.inputWidth {
+  width: 50%;
+}
+
+.outerFlex {
+  display: flex;
+  align-items: flex-start;
+}
+
+.cvvDiv {
+  display: flex;
+  position: relative;
+}
+
+.cvvInputWidth {
+  width: 37%;
+}
+
+.label {
+  display: inline-block;
+  margin-right: 20px;
+  width: 75px;
+}
+
+.expiry {
+  display: flex;
+}
+
+.shortDiv {
+  width: 190px;
+  margin-bottom: 0;
+}
+
+.displayNone {
+  display: none;
+}
+
+.displayBlock {
+  display: block;
+}
+
+.questionMarkIcon {
+  position: absolute;
+  left: 190px;
+  top: 6px;
+}
+
+.cvvInfo {
+  width: 150px;
+  height: 84px;
+  background-image: url("cvv.png");
+  margin-left: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}
+
+.error {
+  margin-left: 96px;
+  margin-top: 10px;
+  max-width: 89%;
+  color: #a21616;
+  font-size: 14px;
+  font-weight: 600;
+}

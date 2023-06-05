@@ -1,0 +1,66 @@
+.backgroundColor {
+  width: 677px;
+  height: 575px;
+  background-color: #5d5d5d;
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.button {
+  position: absolute;
+  bottom: 5px;
+}
+
+.inputWidth {
+  width: 50%;
+}
+
+.biggerInputWidth {
+  width: 75%;
+}
+
+.shortInputWidth {
+  width: 40%;
+}
+
+.areaCode {
+  width: 40%;
+}
+
+.phoneNumber {
+  width: 90%;
+}
+
+.label {
+  display: inline-block;
+  margin-right: 20px; 
+  width: 75px; 
+}
+
+.inputBaseClass {
+  margin-bottom: 20px;
+}
+
+div.jurisdiction {
+  display: flex;
+}
+
+.rightFlexBox {
+  display: flex;
+}
+
+.shortDiv { width: 200px;}
+
+.flex { 
+  display: flex;
+  align-items: center;
+}
+
+.marginRight {
+  margin-right: 15px;
+}
+
+.paraMargin {
+  margin: 5px;
+}

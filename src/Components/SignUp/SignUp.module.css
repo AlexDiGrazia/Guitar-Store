@@ -1,0 +1,57 @@
+.button {
+  margin-top: 16px;
+  width: 94%;
+  height: 33px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.inputWidth {
+  width: 89%;
+}
+
+.red {
+  background: #bc0808;
+}
+
+.facebook {
+  background: rgb(61 61 188);
+  margin-top: 10px;
+}
+
+.inputDiv {
+  position: relative;
+}
+
+.inputDiv img {
+  position: absolute;
+  right: 40px;
+  text-align: center;
+  top: 30px;
+  max-width: 18px;
+}
+
+.span {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 93%;
+  margin: 9px 0 0;
+}
+
+.hr {
+  width: 45%;
+  height: 0;
+}
+
+.orParagraph {
+  margin: 0 13px;
+}
+
+.error {
+  max-width: 89%;
+  color: #a21616;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-bottom: 0;
+}

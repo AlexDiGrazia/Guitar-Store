@@ -1,0 +1,95 @@
+.cart {
+  /* width: 700px;
+  height: 500px; */
+  background-color: rgb(237, 218, 218);
+  padding: 50px 30px;
+}
+
+.returnHome {
+  margin-bottom: 15px;
+  
+}
+
+.item {
+  padding: 20px 30px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  background: rgb(94, 93, 93);
+}
+
+.numbers {
+  margin-left: auto;
+  display: flex;
+}
+
+.numbers h2 {
+  margin: 0 20px 0 20px;
+}
+
+.flexContainer {
+  display: flex;
+}
+
+.right {
+  margin-left: 30px;
+  padding: 5px 20px;
+  background-color: #5d5d5d;
+  height: fit-content;
+  padding: 16px 20px;
+  border-radius: 3px;
+  min-width: 250px;
+}
+
+.summary {
+  margin-top: 0;
+  text-align: right;
+}
+
+.totalItems {
+  text-align: right;
+}
+
+.promoContainer {
+  display:flex;
+  margin-bottom: 15px;
+}
+
+.promoPrompt {
+  margin-bottom: 7px;
+}
+
+.promoCodeInput {
+  max-width: 200px;
+  width: 89%;
+}
+
+.applyPromoButton {
+  width: fit-content;
+}
+
+.right p {
+  color: white;
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+.nextShipping,
+.returnHome {
+  background-color: #3b3b3b;
+  padding: 5px;
+  font-size: 16;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.errorMessage {
+  max-width: 89%;
+  color: #7e1e1e;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0;
+  text-shadow: 0px 0px 25px #ffffff61;
+  font-size: 16px;
+
+}
