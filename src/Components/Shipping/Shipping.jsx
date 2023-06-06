@@ -219,17 +219,3 @@ class Shipping extends React.Component {
 
 export default Shipping;
 
-{
-  /* <input
-          className={style.button}
-          type="button"
-          onClick={() => setDisplayScreen("bag")}
-          value="back to cart"
-        />
-        <input
-          className={style.button}
-          type="button"
-          onClick={() => this.props.nextPage("payment")}
-          value="next to payment"
-        /> */
-}

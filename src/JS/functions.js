@@ -28,3 +28,16 @@ export const verifyAllFieldsComplete = (stateObj) => {
   );
   return allFieldsComplete;
 };
+
+export const verifyNoErrors = (stateObj) => {
+  let allFieldsComplete = true;
+  if (stateObj === {}) {
+    return allFieldsComplete;
+  } else {
+    Object.values(stateObj).forEach(
+      (value) =>
+        (allFieldsComplete = value.length > 0 ? false : allFieldsComplete)
+    );
+  }
+  return allFieldsComplete;
+};

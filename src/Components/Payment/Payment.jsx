@@ -11,19 +11,15 @@ import {
   securityCodeValidation,
   CARD,
   CARDICON,
+  findDebitCardType,
 } from "../../JS/creditCard";
 
 // import inputBaseStyle from "../InputBase/InputBase.module.css"
 
 class Payment extends React.Component {
-  state = {
-    cvvInfo: "displayNone",
-    cardType: "",
-    error: {},
-  };
-
   mapInputBase = (array) => {
-    const { error, cardType } = this.state;
+    const { error, cardType, cvvInfo } = this.props;
+
     return array.map((obj) => (
       <div className={style.relative}>
         <InputBase
@@ -54,49 +50,18 @@ class Payment extends React.Component {
     ));
   };
 
-  findDebitCardType = (cardNumber) => {
-    const regexPattern = {
-      MASTERCARD: /^5[1-5][0-9]{1,}|^2[2-7][0-9]{1,}$/,
-      VISA: /^4[0-9]{2,}$/,
-      AMERICAN_EXPRESS: /^3[47][0-9]{5,}$/,
-      DISCOVER: /^6(?:011|5[0-9]{2})[0-9]{3,}$/,
-    };
-    for (const card in regexPattern) {
-      if (cardNumber.replace(/[^\d]/g, "").match(regexPattern[card]))
-        return card;
-    }
-    return "";
-  };
-
-  handleBlur = (value, type) => {
-    let errorText;
-    switch (type) {
-      case "card":
-        errorText = cardNumberValidation(value);
-        this.setState((prevState) => ({
-          cardType: this.findDebitCardType(value),
-          error: {
-            ...prevState.error,
-            cardError: errorText,
-          },
-        }));
-        break;
-      case "securityCode":
-        errorText = securityCodeValidation(3, value);
-        this.setState((prevState) => ({
-          error: { ...prevState.error, securityCodeError: errorText },
-        }));
-        break;
-      default:
-        break;
-    }
-  };
-
   showInfo = {};
   render() {
-    const { error, cardType } = this.state;
-    const { maskCreditCard, paymentPageState, nestedStateObjectSetter } =
-      this.props;
+    const {
+      maskCreditCard,
+      paymentPageState,
+      nestedStateObjectSetter,
+      handleBlur,
+      error,
+      cardType,
+      cvvInfo,
+      handleState,
+    } = this.props;
 
     const inputsArray = [
       {
@@ -123,7 +88,7 @@ class Payment extends React.Component {
         maxLength: OTHERCARDS.length,
         onChange: (e) => maskCreditCard(e),
         value: paymentPageState.cardNumber,
-        onBlur: (e) => this.handleBlur(e.target.value, "card"),
+        onBlur: (e) => handleBlur(e.target.value, "card"),
         errorM: error.cardError,
         isCard: true,
         noMarginBottom:
@@ -136,19 +101,16 @@ class Payment extends React.Component {
         id: "cvv",
         text: "CVV",
         name: "cvv",
+        value: paymentPageState.cvv,
         labelClassList: style.label,
         classList: style.cvvInputWidth,
         maxLength: 3,
         shortDiv: style.shortDiv,
-        onBlur: (e) => this.handleBlur(e.target.value, "securityCode"),
+        onBlur: (e) => handleBlur(e.target.value, "securityCode"),
         errorM: error.securityCodeError,
         isCard: false,
         onChange: (e) =>
-          nestedStateObjectSetter(
-            "paymentPageState",
-            'cvv',
-            e.target.value
-          ),
+          nestedStateObjectSetter("paymentPageState", "cvv", e.target.value),
       },
     ];
 
@@ -167,7 +129,7 @@ class Payment extends React.Component {
         onChange: (e) =>
           nestedStateObjectSetter(
             "paymentPageState",
-            'expirationMonth',
+            "expirationMonth",
             e.target.value
           ),
       },
@@ -179,7 +141,7 @@ class Payment extends React.Component {
         onChange: (e) =>
           nestedStateObjectSetter(
             "paymentPageState",
-            'expirationYear',
+            "expirationYear",
             e.target.value
           ),
       },
@@ -206,12 +168,12 @@ class Payment extends React.Component {
             <FontAwesomeIcon
               className={style.questionMarkIcon}
               icon={faCircleQuestion}
-              onMouseOver={() => this.setState({ cvvInfo: "displayBlock" })}
-              onMouseOut={() => this.setState({ cvvInfo: "displayNone" })}
+              onMouseOver={() => handleState( "cvvInfo", "displayBlock" )}
+              onMouseOut={() => handleState( "cvvInfo", "displayNone" )}
             />
           </div>
           <div
-            className={`${style[this.state.cvvInfo]} ${style.cvvInfo}`}
+            className={`${style[cvvInfo]} ${style.cvvInfo}`}
           ></div>
         </div>
       </div>

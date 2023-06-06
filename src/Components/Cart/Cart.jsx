@@ -2,7 +2,17 @@ import React from "react";
 import style from "./Cart.module.css";
 import CartItem from "../CartItem/CartItem";
 import { PHOTOS } from "../../Photos/photos";
-import { formatPhoneNumber, formatToUSDCurrency, verifyAllFieldsComplete } from "../../JS/functions";
+import {
+  formatPhoneNumber,
+  formatToUSDCurrency,
+  verifyAllFieldsComplete,
+  verifyNoErrors,
+} from "../../JS/functions";
+import {
+  cardNumberValidation,
+  findDebitCardType,
+  securityCodeValidation,
+} from "../../JS/creditCard";
 import InputBase from "../InputBase/InputBase";
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import Bag from "../Bag/Bag";
@@ -57,11 +67,11 @@ class Cart extends React.Component {
         backward: "shipping",
       },
       confirmation: {
-        next: "all done bitch",
+        next: "all done",
         back: "Back to Payment",
         forward: null,
-        backward: "payment"
-      }
+        backward: "payment",
+      },
     },
     shippingPageState: {
       addressTitle: "",
@@ -84,13 +94,40 @@ class Cart extends React.Component {
       expirationYear: "",
       cvv: "",
     },
+    error: {},
+    cvvInfo: "displayNone",
+    cardType: "",
   };
 
   handleState = (key, value) => {
     this.setState({ [key]: value });
   };
 
-  nestedStateObjectSetter = (object, key, value ) => {
+  handleBlur = (value, type) => {
+    let errorText;
+    switch (type) {
+      case "card":
+        errorText = cardNumberValidation(value);
+        this.setState((prevState) => ({
+          cardType: findDebitCardType(value),
+          error: {
+            ...prevState.error,
+            cardError: errorText,
+          },
+        }));
+        break;
+      case "securityCode":
+        errorText = securityCodeValidation(3, value);
+        this.setState((prevState) => ({
+          error: { ...prevState.error, securityCodeError: errorText },
+        }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  nestedStateObjectSetter = (object, key, value) => {
     this.setState((prev) => ({
       [object]: {
         ...prev[object],
@@ -98,7 +135,6 @@ class Cart extends React.Component {
       },
     }));
   };
-
 
   handleShippingState = (key, value) => {
     this.setState((prev) => ({
@@ -184,7 +220,7 @@ class Cart extends React.Component {
   };
 
   setErrorMessage = (type) => {
-    const { paymentPageState } = this.state
+    const { paymentPageState, error } = this.state;
     let errorMessage;
     switch (type) {
       case "bag":
@@ -199,13 +235,16 @@ class Cart extends React.Component {
         errorMessage = allFieldsComplete ? "" : "Please complete all fields";
         break;
       case "payment":
-        errorMessage = verifyAllFieldsComplete(paymentPageState) ? "" : "Please complete all fields" 
+        errorMessage =
+          verifyAllFieldsComplete(paymentPageState) && verifyNoErrors(error)
+            ? ""
+            : "Please complete all fields";
     }
     this.setState({ allFieldsValidError: errorMessage });
   };
 
   checkAllFieldsValid = (type) => {
-    const { paymentPageState } = this.state
+    const { paymentPageState } = this.state;
     switch (type) {
       case "bag":
         return this.getCartTotal() > 0;
@@ -216,9 +255,9 @@ class Cart extends React.Component {
         //     (allFieldsComplete = value.length === 0 ? false : allFieldsComplete)
         // );
         return allFieldsComplete;
-      case "payment": 
-       return verifyAllFieldsComplete(paymentPageState)
-        break; 
+      case "payment":
+        return verifyAllFieldsComplete(paymentPageState);
+        break;
     }
   };
 
@@ -235,6 +274,9 @@ class Cart extends React.Component {
       buttonDirection,
       shippingPageState,
       paymentPageState,
+      error,
+      cardType,
+      cvvInfo,
     } = this.state;
 
     const promoInputs = [
@@ -323,11 +365,14 @@ class Cart extends React.Component {
           maskCreditCard={this.maskCreditCard}
           paymentPageState={paymentPageState}
           nestedStateObjectSetter={this.nestedStateObjectSetter}
+          handleBlur={this.handleBlur}
+          error={error}
+          cardType={cardType}
+          cvvInfo={cvvInfo}
+          handleState={this.handleState}
         />
       ),
-      confirmation: (
-        <Confirmation />
-      )
+      confirmation: <Confirmation />,
     };
 
     return (
@@ -377,6 +422,7 @@ class Cart extends React.Component {
               onClick={() => {
                 this.setErrorMessage(screenOnDisplay);
                 this.checkAllFieldsValid(screenOnDisplay) &&
+                  verifyNoErrors(error) &&
                   this.setDisplayScreen(
                     buttonDirection[screenOnDisplay]["forward"]
                   );

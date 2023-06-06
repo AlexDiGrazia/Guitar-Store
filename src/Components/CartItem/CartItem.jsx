@@ -36,7 +36,7 @@ class CartItem extends React.Component {
             Qty:
             <select
               className={style.selector}
-              defaultValue="1"
+              defaultValue={quantity}
               name={selectName}
               id={selectId}
               onChange={selectorOnChange}
