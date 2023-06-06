@@ -19,3 +19,12 @@ export const formatPhoneNumber = (str) => {
     return str;
   }
 };
+
+export const verifyAllFieldsComplete = (stateObj) => {
+  let allFieldsComplete = true;
+  Object.values(stateObj).forEach(
+    (value) =>
+      (allFieldsComplete = value.length === 0 ? false : allFieldsComplete)
+  );
+  return allFieldsComplete;
+};

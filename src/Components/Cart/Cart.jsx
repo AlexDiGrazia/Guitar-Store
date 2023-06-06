@@ -2,12 +2,13 @@ import React from "react";
 import style from "./Cart.module.css";
 import CartItem from "../CartItem/CartItem";
 import { PHOTOS } from "../../Photos/photos";
-import { formatPhoneNumber, formatToUSDCurrency } from "../../JS/functions";
+import { formatPhoneNumber, formatToUSDCurrency, verifyAllFieldsComplete } from "../../JS/functions";
 import InputBase from "../InputBase/InputBase";
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import Bag from "../Bag/Bag";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
+import Confirmation from "../Confirmation/Confirmation";
 
 class Cart extends React.Component {
   state = {
@@ -55,6 +56,12 @@ class Cart extends React.Component {
         forward: "confirmation",
         backward: "shipping",
       },
+      confirmation: {
+        next: "all done bitch",
+        back: "Back to Payment",
+        forward: null,
+        backward: "payment"
+      }
     },
     shippingPageState: {
       addressTitle: "",
@@ -73,10 +80,8 @@ class Cart extends React.Component {
     paymentPageState: {
       cardholderName: "",
       cardNumber: "",
-      expiry: {
-        month: "",
-        year: "",
-      },
+      expirationMonth: "",
+      expirationYear: "",
       cvv: "",
     },
   };
@@ -86,10 +91,9 @@ class Cart extends React.Component {
   };
 
   nestedStateObjectSetter = (object, key, value ) => {
-    console.log(value)
     this.setState((prev) => ({
       [object]: {
-        ...prev.object,
+        ...prev[object],
         [key]: value,
       },
     }));
@@ -180,6 +184,7 @@ class Cart extends React.Component {
   };
 
   setErrorMessage = (type) => {
+    const { paymentPageState } = this.state
     let errorMessage;
     switch (type) {
       case "bag":
@@ -193,11 +198,14 @@ class Cart extends React.Component {
         );
         errorMessage = allFieldsComplete ? "" : "Please complete all fields";
         break;
+      case "payment":
+        errorMessage = verifyAllFieldsComplete(paymentPageState) ? "" : "Please complete all fields" 
     }
     this.setState({ allFieldsValidError: errorMessage });
   };
 
   checkAllFieldsValid = (type) => {
+    const { paymentPageState } = this.state
     switch (type) {
       case "bag":
         return this.getCartTotal() > 0;
@@ -208,6 +216,9 @@ class Cart extends React.Component {
         //     (allFieldsComplete = value.length === 0 ? false : allFieldsComplete)
         // );
         return allFieldsComplete;
+      case "payment": 
+       return verifyAllFieldsComplete(paymentPageState)
+        break; 
     }
   };
 
@@ -314,6 +325,9 @@ class Cart extends React.Component {
           nestedStateObjectSetter={this.nestedStateObjectSetter}
         />
       ),
+      confirmation: (
+        <Confirmation />
+      )
     };
 
     return (

@@ -23,7 +23,7 @@ class Payment extends React.Component {
   };
 
   mapInputBase = (array) => {
-    const { error, cardType } = this.state
+    const { error, cardType } = this.state;
     return array.map((obj) => (
       <div className={style.relative}>
         <InputBase
@@ -41,12 +41,15 @@ class Payment extends React.Component {
           noMarginBottom={obj.noMarginBottom}
         />
         {obj.errorM && <p className={style.error}>{obj.errorM}</p>}
-        {(!error || !error.cardError) && obj.isCard && CARD.includes(cardType) && (
-          <img 
-            className={style.creditCardIcon}
-            src={CARDICON[cardType]} 
-            alt="card"></img>
-        )}
+        {(!error || !error.cardError) &&
+          obj.isCard &&
+          CARD.includes(cardType) && (
+            <img
+              className={style.creditCardIcon}
+              src={CARDICON[cardType]}
+              alt="card"
+            ></img>
+          )}
       </div>
     ));
   };
@@ -140,6 +143,12 @@ class Payment extends React.Component {
         onBlur: (e) => this.handleBlur(e.target.value, "securityCode"),
         errorM: error.securityCodeError,
         isCard: false,
+        onChange: (e) =>
+          nestedStateObjectSetter(
+            "paymentPageState",
+            'cvv',
+            e.target.value
+          ),
       },
     ];
 
@@ -149,18 +158,47 @@ class Payment extends React.Component {
       yearsArray.push(year);
     }
 
+    const selectArray = [
+      {
+        htmlFor: "Exp.Date",
+        array: moment.months(),
+        selected: " -Month",
+        label: true,
+        onChange: (e) =>
+          nestedStateObjectSetter(
+            "paymentPageState",
+            'expirationMonth',
+            e.target.value
+          ),
+      },
+      {
+        htmlFor: "Exp.Date",
+        array: yearsArray,
+        selected: " -Year",
+        label: false,
+        onChange: (e) =>
+          nestedStateObjectSetter(
+            "paymentPageState",
+            'expirationYear',
+            e.target.value
+          ),
+      },
+    ];
+
     return (
       <div className={style.background}>
         <h2>Payment Information</h2>
         {this.mapInputBase(inputsArray)}
         <div className={style.expiry}>
-          <Select
-            htmlFor="Exp.Date"
-            array={moment.months()}
-            selected=" -Month"
-            label={true}
-          />
-          <Select selected=" -Year" label={false} array={yearsArray} />
+          {selectArray.map((obj) => (
+            <Select
+              htmlFor={obj.htmlFor}
+              array={obj.array}
+              selected={obj.selected}
+              label={obj.label}
+              onChange={obj.onChange}
+            />
+          ))}
         </div>
         <div className={style.outerFlex}>
           <div className={style.cvvDiv}>
@@ -176,19 +214,6 @@ class Payment extends React.Component {
             className={`${style[this.state.cvvInfo]} ${style.cvvInfo}`}
           ></div>
         </div>
-
-        <input
-          className={style.buttons}
-          type="button"
-          onClick={() => this.props.nextPage("shipping")}
-          value="back to shipping"
-        />
-        <input
-          className={style.buttons}
-          type="button"
-          onClick={() => this.props.nextPage("confirmation")}
-          value="next to confirmation"
-        />
       </div>
     );
   }
