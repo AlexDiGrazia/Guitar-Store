@@ -66,7 +66,7 @@ export const cardNumberValidation = (cardNumber) => {
     if (cardNumber.replace(/[^\d]/g, "").match(regexPattern[card])) {
       if (cardNumber) {
         return cardNumber &&
-          /^[1-6]{1}[0-9]{15}$/i.test(
+          /^[1-6]{1}[0-9]{14,15}$/i.test(
             cardNumber.replace(/[^\d]/g, "").trim()
           )
           ? ""

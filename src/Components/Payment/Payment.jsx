@@ -9,6 +9,8 @@ import {
   cardNumberValidation,
   OTHERCARDS,
   securityCodeValidation,
+  CARD,
+  CARDICON,
 } from "../../JS/creditCard";
 
 // import inputBaseStyle from "../InputBase/InputBase.module.css"
@@ -21,8 +23,9 @@ class Payment extends React.Component {
   };
 
   mapInputBase = (array) => {
+    const { error, cardType } = this.state
     return array.map((obj) => (
-      <div>
+      <div className={style.relative}>
         <InputBase
           id={obj.id}
           text={obj.text}
@@ -38,6 +41,12 @@ class Payment extends React.Component {
           noMarginBottom={obj.noMarginBottom}
         />
         {obj.errorM && <p className={style.error}>{obj.errorM}</p>}
+        {(!error || !error.cardError) && obj.isCard && CARD.includes(cardType) && (
+          <img 
+            className={style.creditCardIcon}
+            src={CARDICON[cardType]} 
+            alt="card"></img>
+        )}
       </div>
     ));
   };
@@ -82,7 +91,7 @@ class Payment extends React.Component {
 
   showInfo = {};
   render() {
-    const { error } = this.state;
+    const { error, cardType } = this.state;
     const { maskCreditCard, paymentPageState, nestedStateObjectSetter } =
       this.props;
 
@@ -100,6 +109,7 @@ class Payment extends React.Component {
             e.target.value.replace(/[^a-zA-Z\s-]/g, "")
           ),
         value: paymentPageState.cardholderName,
+        isCard: false,
       },
       {
         id: "number",
@@ -112,7 +122,9 @@ class Payment extends React.Component {
         value: paymentPageState.cardNumber,
         onBlur: (e) => this.handleBlur(e.target.value, "card"),
         errorM: error.cardError,
-        noMarginBottom: error.cardError && error.cardError.length > 0 && style.noMarginBottom
+        isCard: true,
+        noMarginBottom:
+          error.cardError && error.cardError.length > 0 && style.noMarginBottom,
       },
     ];
 
@@ -127,6 +139,7 @@ class Payment extends React.Component {
         shortDiv: style.shortDiv,
         onBlur: (e) => this.handleBlur(e.target.value, "securityCode"),
         errorM: error.securityCodeError,
+        isCard: false,
       },
     ];
 

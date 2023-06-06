@@ -86,3 +86,14 @@
   font-size: 14px;
   font-weight: 600;
 }
+
+.creditCardIcon {
+  max-width: 30px;
+  position: absolute;
+  top: 5px;
+  right: 240px;
+}
+
+.relative {
+  position: relative;
+}
