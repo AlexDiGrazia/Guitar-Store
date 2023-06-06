@@ -55,7 +55,7 @@ class Shipping extends React.Component {
         text: "Address title",
         classList: style.inputWidth,
         labelClassList: style.label,
-        onChange: (e) => handleShippingState("addressTitle", e.target.value.trim()),
+        onChange: (e) => handleShippingState("addressTitle", e.target.value),
         value: shippingPageState.addressTitle,
       },
       {
@@ -64,7 +64,7 @@ class Shipping extends React.Component {
         text: "Full Name",
         classList: style.inputWidth,
         labelClassList: style.label,
-        onChange: (e) => handleShippingState("fullName", e.target.value.trim()),
+        onChange: (e) => handleShippingState("fullName", e.target.value),
         value: shippingPageState.fullName,
       },
       {
@@ -73,7 +73,7 @@ class Shipping extends React.Component {
         text: "Street Address",
         classList: style.biggerInputWidth,
         labelClassList: style.label,
-        onChange: (e) => handleShippingState("streetAddress", e.target.value.trim()),
+        onChange: (e) => handleShippingState("streetAddress", e.target.value),
         value: shippingPageState.streetAddress,
       },
     ];
