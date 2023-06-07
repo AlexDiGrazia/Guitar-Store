@@ -3,8 +3,10 @@
   height: 575px;
   background-color: #5d5d5d;
   position: relative;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding-left: 37px;
+  padding-top: 27px;
+  box-shadow: 0 6px 13px -3px black;
+  border-radius: 3px;
 }
 
 .button {

@@ -6,6 +6,7 @@
   background: rgb(94, 93, 93);
   font-size: 24px;
   border-radius: 3px;
+  box-shadow: 0 6px 13px -3px black;
 }
 
 .imgWrapper img {
@@ -39,7 +40,8 @@
 .quantity {
   font-size: 12px;
   border: 2px solid #858585;
-  background-color: #3b3b3b;
+  /* background-color: #b66565; */
+  background-color: #3B3B3B;
   padding: 3px 0px 3px 5px;
   border-radius: 3px;
   max-width: fit-content;
@@ -47,6 +49,8 @@
 
 .selector {
   border: none;
+  /* background-color: #b66565; */
+  background-color: #3B3B3B;
 }
 
 div .totalPrice {
@@ -64,4 +68,4 @@ div .totalPrice {
 
 .description p {
   font-size: 15px;
-}
+} 

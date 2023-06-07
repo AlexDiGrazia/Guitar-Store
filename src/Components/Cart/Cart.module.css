@@ -1,8 +1,13 @@
 .cart {
   /* width: 700px;
   height: 500px; */
-  background-color: rgb(237, 218, 218);
+  /* background-color: rgb(237, 218, 218); */
   padding: 50px 30px;
+}
+
+
+.cartInvoice {
+  margin-bottom: 20px;
 }
 
 .returnHome {
@@ -39,6 +44,7 @@
   padding: 16px 20px;
   border-radius: 3px;
   min-width: 250px;
+  box-shadow: 0 6px 13px -3px black;
 }
 
 .summary {
@@ -65,7 +71,11 @@
 }
 
 .applyPromoButton {
-  width: fit-content;
+  /* width: fit-content; */
+  background-color: #B66565;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
 }
 
 .right p {
@@ -76,10 +86,10 @@
 
 .nextShipping,
 .returnHome {
-  background-color: #3b3b3b;
-  padding: 5px;
-  font-size: 16;
-  font-weight: 500;
+  background-color: #b66565;
+  padding: 10px 71px;
+  font-size: 16px;
+  font-weight: 600;
   border-radius: 3px;
 }
 

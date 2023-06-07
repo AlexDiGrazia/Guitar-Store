@@ -50,29 +50,30 @@ class Cart extends React.Component {
     shippingOption: "free",
     buttonDirection: {
       bag: {
-        next: "Next to shipping",
-        back: "Back to Home",
+        next: "CHECKOUT",
+        back: "BACK TO HOME",
         forward: "shipping",
       },
       shipping: {
-        next: "Next to Payment",
-        back: "Back to Cart",
+        next: "CHECKOUT",
+        back: "BACK TO CART",
         forward: "payment",
         backward: "bag",
       },
       payment: {
-        next: "Submit Payment",
-        back: "Back to Shipping",
+        next: null,
+        back: "BACK TO SHIPPING",
         forward: "confirmation",
         backward: "shipping",
       },
       confirmation: {
         next: "all done",
-        back: "Back to Payment",
+        back: "BACK TO PAYMENT",
         forward: null,
         backward: "payment",
       },
     },
+    totalCartPrice: "$5,000",
     shippingPageState: {
       addressTitle: "",
       fullName: "",
@@ -428,7 +429,11 @@ class Cart extends React.Component {
                   );
               }}
               onBlur={() => this.setState({ allFieldsValidError: "" })}
-              value={buttonDirection[screenOnDisplay]["next"]}
+              value={
+                screenOnDisplay === "payment"
+                  ? `PAY  ${formatToUSDCurrency(total)}`
+                  : buttonDirection[screenOnDisplay]["next"]
+              }
             />
             <br />
             <label className={style.errorMessage} htmlFor="checkout">
