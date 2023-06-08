@@ -132,6 +132,7 @@ class Payment extends React.Component {
             "expirationMonth",
             e.target.value
           ),
+        value: 'expirationMonth',  
       },
       {
         htmlFor: "Exp.Date",
@@ -144,6 +145,7 @@ class Payment extends React.Component {
             "expirationYear",
             e.target.value
           ),
+          value: 'expirationYear',
       },
     ];
 
@@ -159,6 +161,7 @@ class Payment extends React.Component {
               selected={obj.selected}
               label={obj.label}
               onChange={obj.onChange}
+              disabled={paymentPageState[obj.value]}
             />
           ))}
         </div>

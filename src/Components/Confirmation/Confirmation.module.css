@@ -1,5 +1,61 @@
-.brown {
-  width: 100px;
-  height: 100px;
-  background-color: brown;
+.background {
+  width: 677px;
+  height: 575px;
+  background-color: #5d5d5d;
+  position: relative;
+  border-radius: 3px;
+  padding-left: 37px;
+  padding-top: 27px;
+  box-shadow: 0 6px 13px -3px black;
 }
+
+.text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 90px;
+}
+
+.text h3 {
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+.text p {
+  margin-bottom: 35px;
+  margin-top: 18px;
+
+}
+
+.checkMark {
+  height: 18%;
+  color: #b66565;
+  margin-bottom: 15px;
+}
+
+.trackOrder {
+  margin-bottom: 17px;
+  padding: 13px 62px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #b66565;
+}
+
+.backToHomePage {
+  margin-bottom: 20px;
+  padding: 12px 13px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: white;
+  color: black;
+}
+
+
+

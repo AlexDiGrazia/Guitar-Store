@@ -280,6 +280,8 @@ class Cart extends React.Component {
       cvvInfo,
     } = this.state;
 
+    const { nextPage } = this.props;
+
     const promoInputs = [
       {
         id: "promo",
@@ -373,23 +375,26 @@ class Cart extends React.Component {
           handleState={this.handleState}
         />
       ),
-      confirmation: <Confirmation />,
+      confirmation: <Confirmation nextPage={nextPage}/>,
     };
 
     return (
       <div className={style.cart}>
-        <input
-          className={style.returnHome}
-          type="button"
-          onClick={() => {
-            screenOnDisplay === "bag"
-              ? this.props.nextPage("home-page")
-              : this.setDisplayScreen(
-                  buttonDirection[screenOnDisplay]["backward"]
-                );
-          }}
-          value={buttonDirection[screenOnDisplay]["back"]}
-        />
+        {screenOnDisplay !== "confirmation" && (
+          <input
+            className={style.returnHome}
+            type="button"
+            onClick={() => {
+              screenOnDisplay === "bag"
+                ? nextPage("home-page")
+                : this.setDisplayScreen(
+                    buttonDirection[screenOnDisplay]["backward"]
+                  );
+            }}
+            value={buttonDirection[screenOnDisplay]["back"]}
+          />
+        )}
+        <div className={style.progressBar}></div>
         <div className={style.flexContainer}>
           <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
           <div className={style.right}>
@@ -416,25 +421,27 @@ class Cart extends React.Component {
               ))}
             </div>
 
-            <input
-              className={style.nextShipping}
-              name="checkout"
-              type="button"
-              onClick={() => {
-                this.setErrorMessage(screenOnDisplay);
-                this.checkAllFieldsValid(screenOnDisplay) &&
-                  verifyNoErrors(error) &&
+            {screenOnDisplay !== "confirmation" && (
+              <input
+                className={style.nextShipping}
+                name="checkout"
+                type="button"
+                onClick={() => {
+                  // this.setErrorMessage(screenOnDisplay);
+                  // this.checkAllFieldsValid(screenOnDisplay) &&
+                  //   verifyNoErrors(error) &&
                   this.setDisplayScreen(
                     buttonDirection[screenOnDisplay]["forward"]
                   );
-              }}
-              onBlur={() => this.setState({ allFieldsValidError: "" })}
-              value={
-                screenOnDisplay === "payment"
-                  ? `PAY  ${formatToUSDCurrency(total)}`
-                  : buttonDirection[screenOnDisplay]["next"]
-              }
-            />
+                }}
+                onBlur={() => this.setState({ allFieldsValidError: "" })}
+                value={
+                  screenOnDisplay === "payment"
+                    ? `PAY  ${formatToUSDCurrency(total)}`
+                    : buttonDirection[screenOnDisplay]["next"]
+                }
+              />
+            )}
             <br />
             <label className={style.errorMessage} htmlFor="checkout">
               {allFieldsValidError}

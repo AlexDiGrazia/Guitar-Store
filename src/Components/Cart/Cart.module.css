@@ -5,6 +5,15 @@
   padding: 50px 30px;
 }
 
+.progressBar {
+  height: 95px;
+  width: 100%;
+  background: rgb(94, 93, 93);
+  margin-bottom: 20px;
+  border-radius: 3px;
+  box-shadow: 0 6px 13px -3px black;
+}
+
 
 .cartInvoice {
   margin-bottom: 20px;
