@@ -19,6 +19,8 @@ import Bag from "../Bag/Bag";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 class Cart extends React.Component {
   state = {
@@ -344,6 +346,25 @@ class Cart extends React.Component {
       },
     ];
 
+    const progressIcons = [
+      {
+        text: "Cart",
+        bool: true,
+      },
+      {
+        text: "Shipping",
+        bool: true,
+      },
+      {
+        text: "Payment",
+        bool: true,
+      },
+      {
+        text: "Confirmation",
+        bool: false,
+      },
+    ];
+
     const componentsObject = {
       bag: (
         <Bag
@@ -375,7 +396,7 @@ class Cart extends React.Component {
           handleState={this.handleState}
         />
       ),
-      confirmation: <Confirmation nextPage={nextPage}/>,
+      confirmation: <Confirmation nextPage={nextPage} />,
     };
 
     return (
@@ -394,7 +415,17 @@ class Cart extends React.Component {
             value={buttonDirection[screenOnDisplay]["back"]}
           />
         )}
-        <div className={style.progressBar}></div>
+        <div className={style.progressBar}>
+          {progressIcons.map((icon) => (
+            <>
+              <div className={style.flex}>
+                <FontAwesomeIcon icon={faCircleCheck} className={style.icon} />
+                <p>{icon.text}</p>
+              </div>
+                {icon.bool && <hr className={style.hr} />}
+            </>
+          ))}
+        </div>
         <div className={style.flexContainer}>
           <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
           <div className={style.right}>

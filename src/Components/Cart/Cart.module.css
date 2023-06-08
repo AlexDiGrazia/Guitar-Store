@@ -12,8 +12,38 @@
   margin-bottom: 20px;
   border-radius: 3px;
   box-shadow: 0 6px 13px -3px black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 15px;
+  width: 20px;
+  overflow: visible;
+}
+
+.flex p {
+  margin: 7px 0 0 0;
+}
+
+.icon {
+  height: 30px;
+}
+
+.hr {
+  width: 26%;
+  height: 10px;
+  background: white;
+  border: none;
+  margin: 0px -121px;
+  margin-bottom: 15px;
+}
 
 .cartInvoice {
   margin-bottom: 20px;
@@ -21,7 +51,6 @@
 
 .returnHome {
   margin-bottom: 15px;
-  
 }
 
 .item {
@@ -66,7 +95,7 @@
 }
 
 .promoContainer {
-  display:flex;
+  display: flex;
   margin-bottom: 15px;
 }
 
@@ -81,7 +110,7 @@
 
 .applyPromoButton {
   /* width: fit-content; */
-  background-color: #B66565;
+  background-color: #b66565;
   font-size: 16px;
   font-weight: 500;
   color: white;
@@ -110,5 +139,4 @@
   margin-bottom: 0;
   text-shadow: 0px 0px 25px #ffffff61;
   font-size: 16px;
-
 }
