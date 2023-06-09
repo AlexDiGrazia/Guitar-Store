@@ -20,7 +20,16 @@ import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTruck,
+  faCreditCard,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+// import { faCircleCheck as emptyCircleCheck } from "@fortawesome/free-regular-svg-icons";
+// import { library } from "@fortawesome/fontawesome-svg-core";
+
+// library.add(emptyCircleCheck);
 
 class Cart extends React.Component {
   state = {
@@ -100,6 +109,69 @@ class Cart extends React.Component {
     error: {},
     cvvInfo: "displayNone",
     cardType: "",
+    progressBarIcons: {
+      bag: {
+        innerColor: style.white,
+        circle: style.red,
+        icon: faCheck,
+        hr: style.lightGrey,
+      },
+      shipping: {
+        innerColor: style.darkGrey,
+        circle: style.grey,
+        icon: faTruck,
+        hr: style.lightGrey,
+      },
+      payment: {
+        innerColor: style.darkGrey,
+        circle: style.grey,
+        icon: faCreditCard,
+        hr: style.lightGrey,
+      },
+      confirmation: {
+        innerColor: style.darkGrey,
+        circle: style.grey,
+        icon: faThumbsUp,
+        hr: style.lightGrey,
+      },
+    },
+  };
+
+  progressBarIconStateSetter = (page, bar) => {
+    const { progressBarIcons } = this.state;
+    const icons = {
+      bag: faCheck,
+      shipping: faTruck,
+      payment: faCreditCard,
+      confirmation: faThumbsUp,
+    };
+    let iconColor =
+      progressBarIcons[page]["innerColor"] === style.darkGrey
+        ? style.white
+        : style.darkGrey;
+    let circleColor =
+      progressBarIcons[page]["circle"] === style.grey ? style.red : style.grey;
+    let fontAwesomeIcon =
+      progressBarIcons[page]["icon"] !== faCheck ? faCheck : icons[page];
+    let hrColor =
+      progressBarIcons[bar]["hr"] === style.lightGrey
+        ? style.red
+        : style.lightGrey;
+    this.setState((prev) => ({
+      progressBarIcons: {
+        ...prev.progressBarIcons,
+        [page]: {
+          ...prev.progressBarIcons[page],
+          innerColor: iconColor,
+          circle: circleColor,
+          icon: fontAwesomeIcon,
+        },
+        [bar]: {
+          ...prev.progressBarIcons[bar],
+          hr: hrColor,
+        },
+      },
+    }));
   };
 
   handleState = (key, value) => {
@@ -280,6 +352,7 @@ class Cart extends React.Component {
       error,
       cardType,
       cvvInfo,
+      progressBarIcons,
     } = this.state;
 
     const { nextPage } = this.props;
@@ -350,18 +423,26 @@ class Cart extends React.Component {
       {
         text: "Cart",
         bool: true,
+        fontAwesome: progressBarIcons["bag"]["icon"],
+        value: "bag",
       },
       {
         text: "Shipping",
         bool: true,
+        fontAwesome: progressBarIcons["shipping"]["icon"],
+        value: "shipping",
       },
       {
         text: "Payment",
         bool: true,
+        fontAwesome: progressBarIcons["payment"]["icon"],
+        value: "payment",
       },
       {
         text: "Confirmation",
         bool: false,
+        fontAwesome: progressBarIcons["confirmation"]["icon"],
+        value: "confirmation",
       },
     ];
 
@@ -406,11 +487,17 @@ class Cart extends React.Component {
             className={style.returnHome}
             type="button"
             onClick={() => {
-              screenOnDisplay === "bag"
-                ? nextPage("home-page")
-                : this.setDisplayScreen(
-                    buttonDirection[screenOnDisplay]["backward"]
-                  );
+              if (screenOnDisplay === "bag") {
+                nextPage("home-page");
+              } else {
+                this.progressBarIconStateSetter(
+                  screenOnDisplay,
+                  buttonDirection[screenOnDisplay]["backward"]
+                );
+                this.setDisplayScreen(
+                  buttonDirection[screenOnDisplay]["backward"]
+                );
+              }
             }}
             value={buttonDirection[screenOnDisplay]["back"]}
           />
@@ -419,10 +506,29 @@ class Cart extends React.Component {
           {progressIcons.map((icon) => (
             <>
               <div className={style.flex}>
-                <FontAwesomeIcon icon={faCircleCheck} className={style.icon} />
+                <div
+                  className={`
+                    ${style.circle} 
+                    ${progressBarIcons[icon.value]["circle"]}
+                  `}
+                >
+                  <FontAwesomeIcon
+                    icon={icon.fontAwesome}
+                    className={`
+                      ${style.icon} 
+                      ${progressBarIcons[icon.value]["innerColor"]}
+                      `}
+                  />
+                </div>
                 <p>{icon.text}</p>
               </div>
-                {icon.bool && <hr className={style.hr} />}
+              {icon.bool && (
+                <hr
+                  className={`${style.hr} ${
+                    progressBarIcons[icon.value]["hr"]
+                  }`}
+                />
+              )}
             </>
           ))}
         </div>
@@ -461,6 +567,10 @@ class Cart extends React.Component {
                   // this.setErrorMessage(screenOnDisplay);
                   // this.checkAllFieldsValid(screenOnDisplay) &&
                   //   verifyNoErrors(error) &&
+                  this.progressBarIconStateSetter(
+                    buttonDirection[screenOnDisplay]["forward"],
+                    screenOnDisplay
+                  );
                   this.setDisplayScreen(
                     buttonDirection[screenOnDisplay]["forward"]
                   );

@@ -32,17 +32,50 @@
   margin: 7px 0 0 0;
 }
 
+.circle {
+  border-radius: 50%;
+  background: #A2A1A1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  z-index: 1;
+  box-shadow: 0 0 18px 0px #0000004a;
+}
+
+.darkGrey {
+  color: #5D5D5D;
+}
+
+.grey {
+  color: #A2A1A1;
+}
+
+.white {
+  color: white;
+}
+
+.red {
+  background:#b66565;
+}
+
 .icon {
-  height: 30px;
+  height: 16px;
+ 
+}
+
+.lightGrey {
+  background: #7A7878;
 }
 
 .hr {
   width: 26%;
   height: 10px;
-  background: white;
   border: none;
   margin: 0px -121px;
   margin-bottom: 15px;
+  box-shadow: 0 0 15px -2px #0000004a;
 }
 
 .cartInvoice {
