@@ -699,3 +699,79 @@ export const cities = [
   "York",
   "Youngstown",
 ];
+
+export const itemsArray = [
+  {
+    photo: "LesPaul",
+    alt: "Gibson Les Paul",
+    headerSixText: "Gibson Les Paul",
+    paraText: "Color: Cherry Burst",
+    price: 3000,
+    product: "guitar",
+  },
+  {
+    photo: "Picks",
+    alt: "Dunlop Guitar Picks",
+    headerSixText: "Dunlop Guitar Picks",
+    paraText: "Color: Assorted",
+    price: 25,
+    product: "picks",
+  },
+  {
+    photo: "QuarterInchCable",
+    alt: "Quarter Inch Cable",
+    headerSixText: "Quarter Inch Guitar Cable",
+    paraText: "Length: 6ft",
+    price: 30,
+    product: "cable",
+  },
+  {
+    photo: "Wah",
+    alt: "Ernie Ball Wah Pedal",
+    headerSixText: "Ernie Ball",
+    paraText: "Wah Pedal",
+    price: 200,
+    product: "wah",
+  },
+  {
+    photo: "Marshall",
+    alt: "Marshall Combo Amp",
+    headerSixText: "Marshall",
+    paraText: "JVM210C 100W Combo Amp",
+    price: 3100,
+    product: "marshall",
+  },
+];
+
+export const halfArray = [
+  {
+    photo: "LesPaul",
+    alt: "Gibson Les Paul",
+    headerSixText: "Gibson Les Paul",
+    product: "guitar",
+  },
+  {
+    photo: "Picks",
+    alt: "Dunlop Guitar Picks",
+    headerSixText: "Dunlop Guitar Picks",
+    product: "picks",
+  },
+  {
+    photo: "QuarterInchCable",
+    alt: "Quarter Inch Cable",
+    headerSixText: "Quarter Inch Guitar Cable",
+    product: "cable",
+  },
+  {
+    photo: "Wah",
+    alt: "Ernie Ball Wah Pedal",
+    headerSixText: "Ernie Ball",
+    product: "wah",
+  },
+  {
+    photo: "Marshall",
+    alt: "Marshall Combo Amp",
+    headerSixText: "Marshall",
+    product: "marshall",
+  },
+];

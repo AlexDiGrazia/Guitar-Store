@@ -123,6 +123,33 @@
   text-align: right;
 }
 
+.summaryImgWrapper {
+  width: 75px;
+  height: 75px;
+  background: white;
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.summaryPhotos {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+.productWrapper {
+  display: flex;
+}
+
+.productText {
+  padding-left: 8px;
+}
+
+.productText h6 {
+  margin-top: 0;
+}
+
 .totalItems {
   text-align: right;
 }
