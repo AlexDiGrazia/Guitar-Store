@@ -2,7 +2,7 @@ import React from "react";
 import style from "./Cart.module.css";
 import CartItem from "../CartItem/CartItem";
 import { PHOTOS } from "../../Photos/photos";
-import { halfArray } from "../../JS/constants";
+import { itemsArray } from "../../JS/constants";
 import {
   formatPhoneNumber,
   formatToUSDCurrency,
@@ -543,26 +543,33 @@ class Cart extends React.Component {
         <div className={style.flexContainer}>
           <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
           <div className={style.right}>
-
-           {/* To Do// add product info to summary items
+            {/* To Do// add product info to summary items
                Create dropdown so summary items are hidden initially unless 'see cart items' is clicked */}
             <h2 className={style.summary}>Summary</h2>
-            {screenOnDisplay !== "bag" && halfArray.map((item) => (
-              <div className={style.productWrapper}>
-                <div className={style.summaryImgWrapper}>
-                  <img
-                    src={PHOTOS[item.photo]}
-                    alt={item.alt}
-                    className={style.summaryPhotos}
-                  />
+            {screenOnDisplay !== "bag" &&
+              itemsArray.map((item) => (
+                <div className={style.productWrapper}>
+                  <div className={style.summaryImgWrapper}>
+                    <img
+                      src={PHOTOS[item.photo]}
+                      alt={item.alt}
+                      className={style.summaryPhotos}
+                    />
+                  </div>
+                  <div className={style.productText}>
+                    <h6>{item.headerSixText}</h6>
+                    <p>{item.paraText}</p>
+                    <div className={style.qtyAndPriceFlexContainer}>
+                      <p>{`Qty: ${quantity[item.product]}`}</p>
+                      <p>
+                        {formatToUSDCurrency(
+                          quantity[item.product] * item.price
+                        )}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className={style.productText}>
-                  <h6>{item.headerSixText}</h6>
-                  <p>dogs</p>
-                  <p>dogs</p>
-                </div>
-              </div>
-            ))}
+              ))}
             <h5 className={style.promoPrompt}>Do you have a Promo Code?</h5>
             <div className={style.promoContainer}>
               {promoInputs.map((obj) => (

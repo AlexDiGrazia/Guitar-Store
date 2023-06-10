@@ -34,7 +34,7 @@
 
 .circle {
   border-radius: 50%;
-  background: #A2A1A1;
+  background: #a2a1a1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,11 +45,11 @@
 }
 
 .darkGrey {
-  color: #5D5D5D;
+  color: #5d5d5d;
 }
 
 .grey {
-  color: #A2A1A1;
+  color: #a2a1a1;
 }
 
 .white {
@@ -57,16 +57,15 @@
 }
 
 .red {
-  background:#b66565;
+  background: #b66565;
 }
 
 .icon {
   height: 16px;
- 
 }
 
 .lightGrey {
-  background: #7A7878;
+  background: #7a7878;
 }
 
 .hr {
@@ -128,9 +127,9 @@
   height: 75px;
   background: white;
   display: flex;
-  justify-content: center;  
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+ 
 }
 
 .summaryPhotos {
@@ -140,14 +139,32 @@
 
 .productWrapper {
   display: flex;
+  background: #4a474747;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  box-shadow: 0 6px 17px -10px black;
 }
 
 .productText {
   padding-left: 8px;
+  width: 100%;
 }
 
 .productText h6 {
   margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 16px;
+}
+
+.right .productText p {
+  margin: 0px 0 0px;
+  font-size: 14px;
+}
+
+.qtyAndPriceFlexContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .totalItems {
