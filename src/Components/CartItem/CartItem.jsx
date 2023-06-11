@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./CartItem.module.css";
 import { formatToUSDCurrency } from "../../JS/functions";
+import { itemsArray } from "../../JS/constants";
 
 class CartItem extends React.Component {
   render() {
@@ -18,11 +19,16 @@ class CartItem extends React.Component {
       selectorOnChange,
       quantity,
       removeItem,
+      cartItem,
+      setCartItemsState,
     } = this.props;
     return (
       <div className={style.item}>
         <div className={style.imageAndInfo}>
-          <div className={style.exit} onClick={removeItem}>
+          <div
+            className={style.exit}
+            onClick={() => setCartItemsState(cartItem)}
+          >
             X
           </div>
           <div className={style.imgWrapper}>

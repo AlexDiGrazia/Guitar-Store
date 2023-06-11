@@ -28,13 +28,10 @@ import {
   faThumbsUp,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
-// import { faCircleCheck as emptyCircleCheck } from "@fortawesome/free-regular-svg-icons";
-// import { library } from "@fortawesome/fontawesome-svg-core";
-
-// library.add(emptyCircleCheck);
 
 class Cart extends React.Component {
   state = {
+    cartItems: itemsArray,
     quantity: {
       guitar: 1,
       picks: 1,
@@ -138,6 +135,37 @@ class Cart extends React.Component {
       },
     },
     summaryCartItemsStatus: style.hidden,
+  };
+
+  // removeItem = (product) => {
+  //   this.setState({
+  //     display: {
+  //       ...this.state.display,
+  //       [product]: "none",
+  //     },
+  //     quantity: {
+  //       ...this.state.quantity,
+  //       [product]: 0,
+  //     },
+  //   });
+  // };
+
+  setCartItemsState = (cartItem) => {
+    itemsArray.splice(
+      itemsArray.findIndex((obj) => obj.product === cartItem),
+      1
+    );
+    this.setState({
+      cartItems: itemsArray,
+      display: {
+        ...this.state.display,
+        [cartItem]: "none",
+      },
+      quantity: {
+        ...this.state.quantity,
+        [cartItem]: 0,
+      },
+    });
   };
 
   progressBarIconStateSetter = (page, bar, direction) => {
@@ -285,19 +313,6 @@ class Cart extends React.Component {
     }));
   };
 
-  removeItem = (product) => {
-    this.setState({
-      display: {
-        ...this.state.display,
-        [product]: "none",
-      },
-      quantity: {
-        ...this.state.quantity,
-        [product]: 0,
-      },
-    });
-  };
-
   getCartTotal = () => {
     return Object.values(this.state.quantity).reduce((a, b) => a + b);
   };
@@ -346,6 +361,7 @@ class Cart extends React.Component {
 
   render() {
     const {
+      cartItems,
       quantity,
       display,
       price,
@@ -396,6 +412,7 @@ class Cart extends React.Component {
     const discount = discountPercentage ? subTotal * discountPercentage : "-";
 
     const freeOrExpressShipping = shippingOption === "free" ? 0 : 5;
+
     const total =
       (Number.isInteger(discount) ? subTotal - discount : subTotal) +
       freeOrExpressShipping;
@@ -458,10 +475,12 @@ class Cart extends React.Component {
     const componentsObject = {
       bag: (
         <Bag
+          cartItems={cartItems}
           display={display}
           quantity={quantity}
           setQuantity={(e, product) => this.setQuantity(e, product)}
           removeItem={(product) => this.removeItem(product)}
+          setCartItemsState={this.setCartItemsState}
         />
       ),
       shipping: (
@@ -555,7 +574,7 @@ class Cart extends React.Component {
                     summaryCartItemsStatus === style.hidden
                       ? style.reveal
                       : style.hidden;
-                  this.setState({ summaryCartItemsStatus: display})    
+                  this.setState({ summaryCartItemsStatus: display });
                 }}
               >
                 See cart Items
@@ -563,7 +582,7 @@ class Cart extends React.Component {
             )}
             <div className={summaryCartItemsStatus}>
               {screenOnDisplay !== "bag" &&
-                itemsArray.map((item) => (
+                cartItems.map((item) => (
                   <div className={style.productWrapper}>
                     <div className={style.summaryImgWrapper}>
                       <img

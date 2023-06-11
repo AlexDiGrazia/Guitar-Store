@@ -780,3 +780,4 @@ export const halfArray = [
     paraText: "JVM210C 100W Combo Amp",
   },
 ];
+
