@@ -129,12 +129,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
- 
+}
+
+.hidden {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .3s linear;
+}
+
+.reveal {
+  max-height: 240px;
+  overflow: scroll;
+  transition: all .3s linear;
 }
 
 .summaryPhotos {
   max-width: 75px;
   max-height: 75px;
+}
+
+.right p.seeCartItems {
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 .productWrapper {

@@ -137,6 +137,7 @@ class Cart extends React.Component {
         hr: style.lightGrey,
       },
     },
+    summaryCartItemsStatus: style.hidden,
   };
 
   progressBarIconStateSetter = (page, bar, direction) => {
@@ -360,6 +361,7 @@ class Cart extends React.Component {
       cardType,
       cvvInfo,
       progressBarIcons,
+      summaryCartItemsStatus,
     } = this.state;
 
     const { nextPage } = this.props;
@@ -543,33 +545,48 @@ class Cart extends React.Component {
         <div className={style.flexContainer}>
           <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
           <div className={style.right}>
-            {/* To Do// add product info to summary items
-               Create dropdown so summary items are hidden initially unless 'see cart items' is clicked */}
+            {/* To Do// created shared array */}
             <h2 className={style.summary}>Summary</h2>
-            {screenOnDisplay !== "bag" &&
-              itemsArray.map((item) => (
-                <div className={style.productWrapper}>
-                  <div className={style.summaryImgWrapper}>
-                    <img
-                      src={PHOTOS[item.photo]}
-                      alt={item.alt}
-                      className={style.summaryPhotos}
-                    />
-                  </div>
-                  <div className={style.productText}>
-                    <h6>{item.headerSixText}</h6>
-                    <p>{item.paraText}</p>
-                    <div className={style.qtyAndPriceFlexContainer}>
-                      <p>{`Qty: ${quantity[item.product]}`}</p>
-                      <p>
-                        {formatToUSDCurrency(
-                          quantity[item.product] * item.price
-                        )}
-                      </p>
+            {screenOnDisplay !== "bag" && (
+              <p
+                className={style.seeCartItems}
+                onClick={() => {
+                  let display =
+                    summaryCartItemsStatus === style.hidden
+                      ? style.reveal
+                      : style.hidden;
+                  this.setState({ summaryCartItemsStatus: display})    
+                }}
+              >
+                See cart Items
+              </p>
+            )}
+            <div className={summaryCartItemsStatus}>
+              {screenOnDisplay !== "bag" &&
+                itemsArray.map((item) => (
+                  <div className={style.productWrapper}>
+                    <div className={style.summaryImgWrapper}>
+                      <img
+                        src={PHOTOS[item.photo]}
+                        alt={item.alt}
+                        className={style.summaryPhotos}
+                      />
+                    </div>
+                    <div className={style.productText}>
+                      <h6>{item.headerSixText}</h6>
+                      <p>{item.paraText}</p>
+                      <div className={style.qtyAndPriceFlexContainer}>
+                        <p>{`Qty: ${quantity[item.product]}`}</p>
+                        <p>
+                          {formatToUSDCurrency(
+                            quantity[item.product] * item.price
+                          )}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
             <h5 className={style.promoPrompt}>Do you have a Promo Code?</h5>
             <div className={style.promoContainer}>
               {promoInputs.map((obj) => (
