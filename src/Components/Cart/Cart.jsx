@@ -634,7 +634,7 @@ class Cart extends React.Component {
                 <InvoiceLine name={obj.name} price={obj.price} />
               ))}
             </div>
-            {screenOnDisplay === "payment" && (
+            {(screenOnDisplay === "payment" || screenOnDisplay === "confirmation") && (
               <div className={style.shipmentInfo}>
                 <h5
                   onClick={() => {
