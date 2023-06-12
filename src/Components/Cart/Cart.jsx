@@ -28,6 +28,7 @@ import {
   faThumbsUp,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
+import { stateAbbreviations } from "../../JS/constants";
 
 class Cart extends React.Component {
   state = {
@@ -88,7 +89,6 @@ class Cart extends React.Component {
       addressTitle: "",
       fullName: "",
       streetAddress: "",
-      streetAddress: "",
       zipcode: "",
       cellPhoneAreaCode: "",
       cellPhoneNumber: "",
@@ -134,7 +134,10 @@ class Cart extends React.Component {
         hr: style.lightGrey,
       },
     },
-    summaryCartItemsStatus: style.hidden,
+    hiddenOrRevealed: {
+      cartItems: style.hidden,
+      shipping: style.hidden
+    },
   };
 
   // removeItem = (product) => {
@@ -377,7 +380,7 @@ class Cart extends React.Component {
       cardType,
       cvvInfo,
       progressBarIcons,
-      summaryCartItemsStatus,
+      hiddenOrRevealed,
     } = this.state;
 
     const { nextPage } = this.props;
@@ -571,16 +574,21 @@ class Cart extends React.Component {
                 className={style.seeCartItems}
                 onClick={() => {
                   let display =
-                    summaryCartItemsStatus === style.hidden
+                    hiddenOrRevealed.cartItems === style.hidden
                       ? style.reveal
                       : style.hidden;
-                  this.setState({ summaryCartItemsStatus: display });
+                      this.setState((prev) => ({
+                        hiddenOrRevealed: {
+                          ...prev.hiddenOrRevealed,
+                          cartItems: display,
+                        }
+                      }));
                 }}
               >
                 See cart Items
               </p>
             )}
-            <div className={summaryCartItemsStatus}>
+            <div className={hiddenOrRevealed.cartItems}>
               {screenOnDisplay !== "bag" &&
                 cartItems.map((item) => (
                   <div className={style.productWrapper}>
@@ -626,6 +634,42 @@ class Cart extends React.Component {
                 <InvoiceLine name={obj.name} price={obj.price} />
               ))}
             </div>
+            {screenOnDisplay === "payment" && (
+              <div className={style.shipmentInfo}>
+                <h5
+                  onClick={() => {
+                    let display =
+                      hiddenOrRevealed.shipping === style.hidden
+                        ? style.reveal
+                        : style.hidden;
+                    this.setState((prev) => ({
+                      hiddenOrRevealed: {
+                        ...prev.hiddenOrRevealed,
+                        shipping: display,
+                      }
+                    }));
+                  }}
+                >
+                  See Shipment Address
+                </h5>
+                <div className={`${hiddenOrRevealed.shipping} ${style.shipmentContainer}`}>
+                  <p>{shippingPageState.fullName}</p>
+                  <p>{shippingPageState.streetAddress}</p>
+                  <p>
+                    <span>{shippingPageState.city}</span>,{" "}
+                    <span>{stateAbbreviations[shippingPageState.state]}</span>{" "}
+                    <span>{shippingPageState.zipcode}</span>
+                  </p>
+                  <p>
+                    <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
+                    <span>
+                      {formatPhoneNumber(shippingPageState.cellPhoneNumber)}
+                    </span>
+                  </p>
+                  <p>{shippingPageState.addressTitle}</p>
+                </div>
+              </div>
+            )}
 
             {screenOnDisplay !== "confirmation" && (
               <input

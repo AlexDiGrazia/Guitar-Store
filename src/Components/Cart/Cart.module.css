@@ -134,13 +134,13 @@
 .hidden {
   max-height: 0;
   overflow: hidden;
-  transition: all .3s linear;
+  transition: all 0.3s linear;
 }
 
 .reveal {
   max-height: 240px;
   overflow: scroll;
-  transition: all .3s linear;
+  transition: all 0.3s linear;
 }
 
 .summaryPhotos {
@@ -148,7 +148,8 @@
   max-height: 75px;
 }
 
-.right p.seeCartItems {
+.right p.seeCartItems,
+.right .shipmentInfo h5 {
   font-size: 14px;
   text-decoration: underline;
 }
@@ -213,6 +214,23 @@
   color: white;
   font-size: 20px;
   margin: 0 0 8px;
+}
+
+.shipmentInfo {
+  margin-bottom: 20px;
+}
+
+/* .shipmentContainer {
+  padding: 5px 10px;
+  border-radius: 3px;
+  box-shadow: 0 6px 17px -10px black;
+} */
+
+
+
+.right .shipmentInfo p {
+  font-size: 14px;
+  margin-bottom: 1px;
 }
 
 .nextShipping,
