@@ -657,7 +657,7 @@ class Cart extends React.Component {
                   <p>{shippingPageState.streetAddress}</p>
                   <p>
                     <span>{shippingPageState.city}</span>,{" "}
-                    <span>{stateAbbreviations[shippingPageState.state]}</span>{" "}
+                    <span>{stateAbbreviations[shippingPageState.state.replace(/\s/g, '')]}</span>{" "}
                     <span>{shippingPageState.zipcode}</span>
                   </p>
                   <p>
