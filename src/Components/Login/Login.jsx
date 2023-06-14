@@ -68,8 +68,6 @@ class Login extends React.Component {
           }} 
           value="Login"
           />
-       
-  
       </div>
     )
   }

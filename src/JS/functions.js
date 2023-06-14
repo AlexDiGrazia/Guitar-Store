@@ -41,3 +41,7 @@ export const verifyNoErrors = (stateObj) => {
   }
   return allFieldsComplete;
 };
+
+export const getLastFourOfCreditCard = (str) => {
+  return str.replace(/\s/g, '').slice(str.length - 7, str.length)
+}

@@ -8,11 +8,13 @@ import {
   formatToUSDCurrency,
   verifyAllFieldsComplete,
   verifyNoErrors,
+  getLastFourOfCreditCard,
 } from "../../JS/functions";
 import {
   cardNumberValidation,
   findDebitCardType,
   securityCodeValidation,
+  CARDICON,
 } from "../../JS/creditCard";
 import InputBase from "../InputBase/InputBase";
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
@@ -86,17 +88,17 @@ class Cart extends React.Component {
     },
     totalCartPrice: "$5,000",
     shippingPageState: {
-      addressTitle: "",
-      fullName: "",
-      streetAddress: "",
-      zipcode: "",
-      cellPhoneAreaCode: "",
-      cellPhoneNumber: "",
+      addressTitle: "residential",
+      fullName: "John Doe",
+      streetAddress: "57335 Seneca Valley Rd.",
+      zipcode: "32577",
+      cellPhoneAreaCode: "935",
+      cellPhoneNumber: "7852334",
       teleAreaCode: "",
       telephoneNumber: "",
-      country: "",
-      state: "",
-      city: "",
+      country: "USA",
+      state: "Rhode Island",
+      city: "Arberita",
     },
     paymentPageState: {
       cardholderName: "",
@@ -136,7 +138,8 @@ class Cart extends React.Component {
     },
     hiddenOrRevealed: {
       cartItems: style.hidden,
-      shipping: style.hidden
+      shipping: style.hidden,
+      payment: style.hidden
     },
   };
 
@@ -152,6 +155,18 @@ class Cart extends React.Component {
   //     },
   //   });
   // };
+
+  setHiddenOrRevealedState = (key) => {
+    const { hiddenOrRevealed } = this.state;
+    let display =
+      hiddenOrRevealed[key] === style.hidden ? style.reveal : style.hidden;
+    this.setState((prev) => ({
+      hiddenOrRevealed: {
+        ...prev.hiddenOrRevealed,
+        [key]: display,
+      },
+    }));
+  };
 
   setCartItemsState = (cartItem) => {
     itemsArray.splice(
@@ -511,7 +526,7 @@ class Cart extends React.Component {
       confirmation: <Confirmation nextPage={nextPage} />,
     };
 
-    return (
+     return (
       <div className={style.cart}>
         {
           /* screenOnDisplay !== "confirmation" && */ <input
@@ -577,12 +592,12 @@ class Cart extends React.Component {
                     hiddenOrRevealed.cartItems === style.hidden
                       ? style.reveal
                       : style.hidden;
-                      this.setState((prev) => ({
-                        hiddenOrRevealed: {
-                          ...prev.hiddenOrRevealed,
-                          cartItems: display,
-                        }
-                      }));
+                  this.setState((prev) => ({
+                    hiddenOrRevealed: {
+                      ...prev.hiddenOrRevealed,
+                      cartItems: display,
+                    },
+                  }));
                 }}
               >
                 See cart Items
@@ -634,7 +649,7 @@ class Cart extends React.Component {
                 <InvoiceLine name={obj.name} price={obj.price} />
               ))}
             </div>
-            {(screenOnDisplay === "payment" || screenOnDisplay === "confirmation") && (
+            {screenOnDisplay === "payment" && (
               <div className={style.shipmentInfo}>
                 <h5
                   onClick={() => {
@@ -646,18 +661,24 @@ class Cart extends React.Component {
                       hiddenOrRevealed: {
                         ...prev.hiddenOrRevealed,
                         shipping: display,
-                      }
+                      },
                     }));
                   }}
                 >
-                  See Shipment Address
+                  Shipment Address
                 </h5>
-                <div className={`${hiddenOrRevealed.shipping} ${style.shipmentContainer}`}>
+                <div className={`${style.shipmentContainer}`}>
                   <p>{shippingPageState.fullName}</p>
                   <p>{shippingPageState.streetAddress}</p>
                   <p>
                     <span>{shippingPageState.city}</span>,{" "}
-                    <span>{stateAbbreviations[shippingPageState.state.replace(/\s/g, '')]}</span>{" "}
+                    <span>
+                      {
+                        stateAbbreviations[
+                          shippingPageState.state.replace(/\s/g, "")
+                        ]
+                      }
+                    </span>{" "}
                     <span>{shippingPageState.zipcode}</span>
                   </p>
                   <p>
@@ -669,6 +690,94 @@ class Cart extends React.Component {
                   <p>{shippingPageState.addressTitle}</p>
                 </div>
               </div>
+            )}
+
+            {screenOnDisplay === "confirmation" && (
+              // first one
+              <>
+                <div className={style.flexRow}>
+                  <div className={style.shippingMethod}>
+                    <h6>SHIPPING</h6>
+                    <div className={style.summaryContainer}>
+                      <h6>
+                        {shippingOption === "free" ? "Standard" : "Express"}
+                      </h6>
+                      <p>
+                        {"  "}
+                        Delivery in{" "}
+                        {shippingOption === "free" ? "4 - 6" : "1 - 3"} Business
+                        Days
+                      </p>
+                    </div>
+                  </div>
+                  <div className={style.shippingSummary}>
+                    <h5
+                      onClick={() => this.setHiddenOrRevealedState("shipping")}
+                    >
+                      View Shipping Details{" "}
+                    </h5>
+                    <div
+                      className={`${hiddenOrRevealed.shipping} ${style.shippingInfoContainer}`}
+                    >
+                      <p>{shippingPageState.fullName}</p>
+                      <p>{shippingPageState.streetAddress}</p>
+                      <p>
+                        <span>{shippingPageState.city}</span>,{" "}
+                        <span>
+                          {
+                            stateAbbreviations[
+                              shippingPageState.state.replace(/\s/g, "")
+                            ]
+                          }
+                        </span>{" "}
+                        <span>{shippingPageState.zipcode}</span>
+                      </p>
+                      <p>
+                        <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
+                        <span>
+                          {formatPhoneNumber(shippingPageState.cellPhoneNumber)}
+                        </span>
+                      </p>
+                      <p>{shippingPageState.addressTitle}</p>
+                    </div>
+                  </div>
+                </div>
+                {/* second one */}
+                <div className={style.flexRow}>
+                  <div className={style.shippingMethod}>
+                    <h6>PAYMENT</h6>
+                    <div className={style.cardInfoWrapper}>
+                      <h6 className={style.cardHeaderSix}>
+                        {
+                          <>
+                            <img
+                              className={style.creditCardIcon}
+                              src={CARDICON[cardType]}
+                              alt="card"
+                            ></img>
+                            {cardType}
+                          </>
+                        }
+                      </h6>
+                      <p>
+                        Total Payment: {formatToUSDCurrency(total)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={style.shippingSummary}>
+                    <h5
+                      onClick={() => this.setHiddenOrRevealedState("payment")}
+                    >
+                      View Payment Details{" "}
+                    </h5>
+                    <div
+                      className={`${hiddenOrRevealed.payment} ${style.shippingInfoContainer}`}
+                    >
+                      <div>xxxx-xxxx-xxxx-{getLastFourOfCreditCard(paymentPageState.cardNumber)}</div>
+                    </div>
+                  </div>
+                </div>{" "}
+              </>
             )}
 
             {screenOnDisplay !== "confirmation" && (
