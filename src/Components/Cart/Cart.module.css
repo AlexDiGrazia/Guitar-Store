@@ -196,6 +196,10 @@
   text-decoration: underline;
 }
 
+.right p.marginBottom {
+  margin-bottom: 50px;
+}
+
 .productWrapper {
   display: flex;
   background: #4a474747;

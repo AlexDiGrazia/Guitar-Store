@@ -139,7 +139,7 @@ class Cart extends React.Component {
     hiddenOrRevealed: {
       cartItems: style.hidden,
       shipping: style.hidden,
-      payment: style.hidden
+      payment: style.hidden,
     },
   };
 
@@ -526,7 +526,7 @@ class Cart extends React.Component {
       confirmation: <Confirmation nextPage={nextPage} />,
     };
 
-     return (
+    return (
       <div className={style.cart}>
         {
           /* screenOnDisplay !== "confirmation" && */ <input
@@ -586,7 +586,7 @@ class Cart extends React.Component {
             <h2 className={style.summary}>Summary</h2>
             {screenOnDisplay !== "bag" && (
               <p
-                className={style.seeCartItems}
+                className={`${style.seeCartItems} ${screenOnDisplay === 'confirmation' && style.marginBottom}`}
                 onClick={() => {
                   let display =
                     hiddenOrRevealed.cartItems === style.hidden
@@ -629,21 +629,26 @@ class Cart extends React.Component {
                   </div>
                 ))}
             </div>
-            <h5 className={style.promoPrompt}>Do you have a Promo Code?</h5>
-            <div className={style.promoContainer}>
-              {promoInputs.map((obj) => (
-                <InputBase
-                  id={obj.id}
-                  type={obj.type}
-                  name={obj.name}
-                  value={obj.value}
-                  placeholder={obj.placeholder}
-                  classList={obj.classList}
-                  onClick={obj.onClick}
-                  onChange={obj.onChange}
-                />
-              ))}
-            </div>
+            {screenOnDisplay !== "confirmation" && (
+              <>
+                <h5 className={style.promoPrompt}>Do you have a Promo Code?</h5>
+                <div className={style.promoContainer}>
+                  {promoInputs.map((obj) => (
+                    <InputBase
+                      id={obj.id}
+                      type={obj.type}
+                      name={obj.name}
+                      value={obj.value}
+                      placeholder={obj.placeholder}
+                      classList={obj.classList}
+                      onClick={obj.onClick}
+                      onChange={obj.onChange}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
             <div className={style.cartInvoice}>
               {invoiceInfo.map((obj) => (
                 <InvoiceLine name={obj.name} price={obj.price} />
@@ -759,9 +764,7 @@ class Cart extends React.Component {
                           </>
                         }
                       </h6>
-                      <p>
-                        Total Payment: {formatToUSDCurrency(total)}
-                      </p>
+                      <p>Total Payment: {formatToUSDCurrency(total)}</p>
                     </div>
                   </div>
                   <div className={style.shippingSummary}>
@@ -773,7 +776,10 @@ class Cart extends React.Component {
                     <div
                       className={`${hiddenOrRevealed.payment} ${style.shippingInfoContainer}`}
                     >
-                      <div>xxxx-xxxx-xxxx-{getLastFourOfCreditCard(paymentPageState.cardNumber)}</div>
+                      <div>
+                        xxxx-xxxx-xxxx-
+                        {getLastFourOfCreditCard(paymentPageState.cardNumber)}
+                      </div>
                     </div>
                   </div>
                 </div>{" "}
