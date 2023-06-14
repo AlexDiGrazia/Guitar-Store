@@ -534,7 +534,7 @@ class Cart extends React.Component {
             type="button"
             onClick={() => {
               if (screenOnDisplay === "bag") {
-                nextPage("home-page");
+                nextPage("homePage");
               } else {
                 this.progressBarIconStateSetter(
                   screenOnDisplay,
