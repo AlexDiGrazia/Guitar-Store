@@ -24,7 +24,8 @@ class HomePage extends React.Component {
         page: "login",
         group: "select-login-or-create-account",
         id: "login",
-        bool: "login",
+        form: "login",
+        defaultChecked: true,
       },
       {
         button: "create-account",
@@ -32,7 +33,8 @@ class HomePage extends React.Component {
         page: "create-account",
         group: "select-login-or-create-account",
         id: "create-account",
-        bool: "signup",
+        form: "signup",
+        defaultChecked: false,
       },
     ];
 
@@ -43,19 +45,20 @@ class HomePage extends React.Component {
             <div key={obj.id}>
               <label htmlFor={obj.button}>{obj.text}</label>
               <input
-                onChange={() => this.setState({ homePageState: obj.bool })}
+                onChange={() => this.setState({ homePageState: obj.form })}
                 name="select-login-or-create-account"
                 id={obj.id}
                 type="radio"
+                defaultChecked={obj.defaultChecked}
               ></input>
             </div>
           ))}
         </div>
 
-        {this.state.homePageState === "login" ? (
+        {homePageState === "login" ? (
           <Login nextPage={nextPage} userData={userData} />
         ) : (
-          <SignUp nextPage={nextPage} userData={userData}/>
+          <SignUp nextPage={nextPage} userData={userData} />
         )}
       </div>
     );

@@ -28,7 +28,7 @@ class SignUp extends React.Component {
     this.setState({ hiddenOrVisible: arg[0], eyeOpenOrClosed: arg[1] });
   };
 
-  handleValidations = (type, value) => {
+   handleValidations = (type, value) => {
     const { password, confirmPassword, firstName, lastName, zipCode } =
       this.state;
     const { userData } = this.props;
@@ -156,7 +156,7 @@ class SignUp extends React.Component {
     ];
 
     return (
-      <div className={style.blue}>
+      <div>
         {inputsArray.length
           ? inputsArray.map((obj) => (
               <div className={style.inputDiv} key={`sign-up ${obj.id}`}>
