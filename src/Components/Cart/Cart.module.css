@@ -5,18 +5,6 @@
   padding: 50px 30px;
 }
 
-.progressBar {
-  height: 95px;
-  width: 100%;
-  background: rgb(94, 93, 93);
-  margin-bottom: 20px;
-  border-radius: 3px;
-  box-shadow: 0 6px 13px -3px black;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .flexRow {
   display: flex;
   margin-top: 34px;
@@ -59,39 +47,12 @@
   margin: 6px 0;
 }
 
-.flex {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 15px;
-  width: 20px;
-  overflow: visible;
-}
-
-.flex p {
-  margin: 7px 0 0 0;
-}
-
-.circle {
-  border-radius: 50%;
-  background: #a2a1a1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 35px;
-  height: 35px;
-  z-index: 1;
-  box-shadow: 0 0 18px 0px #0000004a;
-}
-
 .darkGrey {
   color: #5d5d5d;
 }
 
 .grey {
-  color: #a2a1a1;
+  background: #a2a1a1;
 }
 
 .white {
@@ -108,15 +69,6 @@
 
 .lightGrey {
   background: #7a7878;
-}
-
-.hr {
-  width: 26%;
-  height: 10px;
-  border: none;
-  margin: 0px -121px;
-  margin-bottom: 15px;
-  box-shadow: 0 0 15px -2px #0000004a;
 }
 
 .cartInvoice {
@@ -265,12 +217,6 @@
 .shipmentInfo {
   margin-bottom: 20px;
 }
-
-/* .shipmentContainer {
-  padding: 5px 10px;
-  border-radius: 3px;
-  box-shadow: 0 6px 17px -10px black;
-} */
 
 .right .shipmentInfo p {
   font-size: 14px;

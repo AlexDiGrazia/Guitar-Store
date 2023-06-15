@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Cart.module.css";
-import CartItem from "../CartItem/CartItem";
+// import CartItem from "../CartItem/CartItem";
 import { PHOTOS } from "../../Photos/photos";
 import { itemsArray } from "../../JS/constants";
 import InputBase from "../InputBase/InputBase";
@@ -9,7 +9,7 @@ import Bag from "../Bag/Bag";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import { stateAbbreviations } from "../../JS/constants";
 import {
   faCheck,
@@ -31,6 +31,7 @@ import {
   securityCodeValidation,
   CARDICON,
 } from "../../JS/creditCard";
+
 
 class Cart extends React.Component {
   state = {
@@ -463,7 +464,7 @@ class Cart extends React.Component {
       },
     ];
 
-    const progressIcons = [
+    /* const progressIcons = [
       {
         text: "Cart",
         bool: true,
@@ -488,7 +489,7 @@ class Cart extends React.Component {
         fontAwesome: progressBarIcons["confirmation"]["icon"],
         value: "confirmation",
       },
-    ];
+    ]; */
 
     const componentsObject = {
       bag: (
@@ -549,36 +550,8 @@ class Cart extends React.Component {
             value={buttonDirection[screenOnDisplay]["back"]}
           />
         }
-        <div className={style.progressBar}>
-          {progressIcons.map((icon) => (
-            <>
-              <div className={style.flex}>
-                <div
-                  className={`
-                    ${style.circle} 
-                    ${progressBarIcons[icon.value]["circle"]}
-                  `}
-                >
-                  <FontAwesomeIcon
-                    icon={icon.fontAwesome}
-                    className={`
-                      ${style.icon} 
-                      ${progressBarIcons[icon.value]["innerColor"]}
-                      `}
-                  />
-                </div>
-                <p>{icon.text}</p>
-              </div>
-              {icon.bool && (
-                <hr
-                  className={`${style.hr} ${
-                    progressBarIcons[icon.value]["hr"]
-                  }`}
-                />
-              )}
-            </>
-          ))}
-        </div>
+        <ProgressBar progressBarIcons={progressBarIcons}/>
+
         <div className={style.flexContainer}>
           <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
           <div className={style.right}>
