@@ -464,33 +464,6 @@ class Cart extends React.Component {
       },
     ];
 
-    /* const progressIcons = [
-      {
-        text: "Cart",
-        bool: true,
-        fontAwesome: progressBarIcons["bag"]["icon"],
-        value: "bag",
-      },
-      {
-        text: "Shipping",
-        bool: true,
-        fontAwesome: progressBarIcons["shipping"]["icon"],
-        value: "shipping",
-      },
-      {
-        text: "Payment",
-        bool: true,
-        fontAwesome: progressBarIcons["payment"]["icon"],
-        value: "payment",
-      },
-      {
-        text: "Confirmation",
-        bool: false,
-        fontAwesome: progressBarIcons["confirmation"]["icon"],
-        value: "confirmation",
-      },
-    ]; */
-
     const componentsObject = {
       bag: (
         <Bag
