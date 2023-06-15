@@ -3,6 +3,21 @@ import style from "./Cart.module.css";
 import CartItem from "../CartItem/CartItem";
 import { PHOTOS } from "../../Photos/photos";
 import { itemsArray } from "../../JS/constants";
+import InputBase from "../InputBase/InputBase";
+import InvoiceLine from "../InvoiceLine/InvoiceLine";
+import Bag from "../Bag/Bag";
+import Shipping from "../Shipping/Shipping";
+import Payment from "../Payment/Payment";
+import Confirmation from "../Confirmation/Confirmation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { stateAbbreviations } from "../../JS/constants";
+import {
+  faCheck,
+  faTruck,
+  faCreditCard,
+  faThumbsUp,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   formatPhoneNumber,
   formatToUSDCurrency,
@@ -16,21 +31,6 @@ import {
   securityCodeValidation,
   CARDICON,
 } from "../../JS/creditCard";
-import InputBase from "../InputBase/InputBase";
-import InvoiceLine from "../InvoiceLine/InvoiceLine";
-import Bag from "../Bag/Bag";
-import Shipping from "../Shipping/Shipping";
-import Payment from "../Payment/Payment";
-import Confirmation from "../Confirmation/Confirmation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheck,
-  faTruck,
-  faCreditCard,
-  faThumbsUp,
-  faCartShopping,
-} from "@fortawesome/free-solid-svg-icons";
-import { stateAbbreviations } from "../../JS/constants";
 
 class Cart extends React.Component {
   state = {
