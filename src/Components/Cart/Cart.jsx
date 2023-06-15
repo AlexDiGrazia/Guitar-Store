@@ -526,25 +526,17 @@ class Cart extends React.Component {
         <ProgressBar progressBarIcons={progressBarIcons}/>
 
         <div className={style.flexContainer}>
-          <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
+          <div className={style.left}>
+            {componentsObject[screenOnDisplay]}
+          </div>
           <div className={style.right}>
             {/* To Do// created shared array */}
+            {/* Summary Component will go here */}
             <h2 className={style.summary}>Summary</h2>
             {screenOnDisplay !== "bag" && (
               <p
                 className={`${style.seeCartItems} ${screenOnDisplay === 'confirmation' && style.marginBottom}`}
-                onClick={() => {
-                  let display =
-                    hiddenOrRevealed.cartItems === style.hidden
-                      ? style.reveal
-                      : style.hidden;
-                  this.setState((prev) => ({
-                    hiddenOrRevealed: {
-                      ...prev.hiddenOrRevealed,
-                      cartItems: display,
-                    },
-                  }));
-                }}
+                onClick={() => this.setHiddenOrRevealedState("cartItems")} /* rename 'showOrHide */
               >
                 See cart Items
               </p>
@@ -603,22 +595,11 @@ class Cart extends React.Component {
             {screenOnDisplay === "payment" && (
               <div className={style.shipmentInfo}>
                 <h5
-                  onClick={() => {
-                    let display =
-                      hiddenOrRevealed.shipping === style.hidden
-                        ? style.reveal
-                        : style.hidden;
-                    this.setState((prev) => ({
-                      hiddenOrRevealed: {
-                        ...prev.hiddenOrRevealed,
-                        shipping: display,
-                      },
-                    }));
-                  }}
+                  onClick={() => this.setHiddenOrRevealedState("shipping")}
                 >
-                  Shipment Address
+                  View Shipment Details
                 </h5>
-                <div className={`${style.shipmentContainer}`}>
+                <div className={`${style.shipmentContainer} ${hiddenOrRevealed.shipping}`}>
                   <p>{shippingPageState.fullName}</p>
                   <p>{shippingPageState.streetAddress}</p>
                   <p>
