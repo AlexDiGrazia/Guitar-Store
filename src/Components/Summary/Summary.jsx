@@ -3,21 +3,13 @@ import style from "./Summary.module.css";
 import InputBase from "../InputBase/InputBase";
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import ShippingSummaryInfo from "../ShippingSummaryInfo/ShippingSummaryInfo";
-import { stateAbbreviations } from "../../JS/constants";
 import { PHOTOS } from "../../Photos/photos";
+import { CARDICON } from "../../JS/creditCard";
 import {
-  formatPhoneNumber,
   formatToUSDCurrency,
-  verifyAllFieldsComplete,
   verifyNoErrors,
   getLastFourOfCreditCard,
 } from "../../JS/functions";
-import {
-  cardNumberValidation,
-  findDebitCardType,
-  securityCodeValidation,
-  CARDICON,
-} from "../../JS/creditCard";
 
 class Summary extends React.Component {
   render() {
@@ -221,7 +213,6 @@ class Summary extends React.Component {
                 </div>
               </div>
             </div>
-            
             {/* Payment */}
             <div className={style.flexRow}>
               <div className={style.shippingMethod}>
