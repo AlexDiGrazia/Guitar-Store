@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Summary.module.css";
 import InputBase from "../InputBase/InputBase";
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
+import ShippingSummaryInfo from "../ShippingSummaryInfo/ShippingSummaryInfo";
 import { stateAbbreviations } from "../../JS/constants";
 import { PHOTOS } from "../../Photos/photos";
 import {
@@ -108,29 +109,25 @@ class Summary extends React.Component {
 
     return (
       <>
-        {/* To Do// created shared array */}
         <h2 className={style.summary}>Summary</h2>
+
+        {/* Prompt to Reveal Cart items */}
         {screenOnDisplay !== "bag" && (
           <p
             className={style.seeCartItems}
-            style={
-              true && 
-              { 
+            style={{
               fontSize: "14px",
               textDecoration: "underline",
-              marginBottom: screenOnDisplay === "confirmation" && '50px',
-            }
-          }
-            
+              marginBottom: screenOnDisplay === "confirmation" && "50px",
+            }}
             onClick={() => setHiddenOrRevealedState("cartItems")}
           >
             See cart Items
           </p>
         )}
-        <div 
-          className={hiddenOrRevealed.cartItems}
-          style={{marginBottom: hiddenOrRevealed.cartItems === '_reveal_1cnzb_92' && '35px'}}
-          >
+
+        {/* Cart-Items container that appears if user clicks prompt */}
+        <div className={hiddenOrRevealed.cartItems}>
           {screenOnDisplay !== "bag" &&
             cartItems.map((item) => (
               <div className={style.productWrapper}>
@@ -154,6 +151,8 @@ class Summary extends React.Component {
               </div>
             ))}
         </div>
+
+        {/* Promo prompt and Input field*/}
         {screenOnDisplay !== "confirmation" && (
           <>
             <h5 className={style.promoPrompt}>Do you have a Promo Code?</h5>
@@ -174,44 +173,29 @@ class Summary extends React.Component {
           </>
         )}
 
+        {/* Cart Totals: $$ */}
         <div className={style.cartInvoice}>
           {invoiceInfo.map((obj) => (
             <InvoiceLine name={obj.name} price={obj.price} />
           ))}
         </div>
+
+        {/* Shipping Info when on Payment Page*/}
         {screenOnDisplay === "payment" && (
           <div className={style.shipmentInfo}>
             <h5 onClick={() => setHiddenOrRevealedState("shipping")}>
               Shipment Address
             </h5>
             <div className={`${style.shipmentContainer}`}>
-              <p>{shippingPageState.fullName}</p>
-              <p>{shippingPageState.streetAddress}</p>
-              <p>
-                <span>{shippingPageState.city}</span>,{" "}
-                <span>
-                  {
-                    stateAbbreviations[
-                      shippingPageState.state.replace(/\s/g, "")
-                    ]
-                  }
-                </span>{" "}
-                <span>{shippingPageState.zipcode}</span>
-              </p>
-              <p>
-                <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
-                <span>
-                  {formatPhoneNumber(shippingPageState.cellPhoneNumber)}
-                </span>
-              </p>
-              <p>{shippingPageState.addressTitle}</p>
+              <ShippingSummaryInfo shippingPageState={shippingPageState} />
             </div>
           </div>
         )}
 
+        {/* Summary of Shipping & Payment on Final Confirmation page*/}
         {screenOnDisplay === "confirmation" && (
-          // first one
           <>
+            {/* Shipping */}
             <div className={style.flexRow}>
               <div className={style.shippingMethod}>
                 <h6>SHIPPING</h6>
@@ -233,30 +217,12 @@ class Summary extends React.Component {
                 <div
                   className={`${hiddenOrRevealed.shipping} ${style.shippingInfoContainer}`}
                 >
-                  <p>{shippingPageState.fullName}</p>
-                  <p>{shippingPageState.streetAddress}</p>
-                  <p>
-                    <span>{shippingPageState.city}</span>,{" "}
-                    <span>
-                      {
-                        stateAbbreviations[
-                          shippingPageState.state.replace(/\s/g, "")
-                        ]
-                      }
-                    </span>{" "}
-                    <span>{shippingPageState.zipcode}</span>
-                  </p>
-                  <p>
-                    <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
-                    <span>
-                      {formatPhoneNumber(shippingPageState.cellPhoneNumber)}
-                    </span>
-                  </p>
-                  <p>{shippingPageState.addressTitle}</p>
+                  <ShippingSummaryInfo shippingPageState={shippingPageState} />
                 </div>
               </div>
             </div>
-            {/* second one */}
+            
+            {/* Payment */}
             <div className={style.flexRow}>
               <div className={style.shippingMethod}>
                 <h6>PAYMENT</h6>
@@ -293,6 +259,7 @@ class Summary extends React.Component {
           </>
         )}
 
+        {/* Checkout Button */}
         {screenOnDisplay !== "confirmation" && (
           <input
             className={style.nextShipping}
