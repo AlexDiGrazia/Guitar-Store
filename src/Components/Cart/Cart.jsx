@@ -7,6 +7,7 @@ import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Summary from "../Summary/Summary";
+import { buttonDirection } from "../../JS/constants";
 import {
   faCheck,
   faTruck,
@@ -57,31 +58,6 @@ class Cart extends React.Component {
     promoCode: "",
     screenOnDisplay: "bag",
     shippingOption: "free",
-    buttonDirection: {
-      bag: {
-        next: "CHECKOUT",
-        back: "BACK TO HOME",
-        forward: "shipping",
-      },
-      shipping: {
-        next: "CHECKOUT",
-        back: "BACK TO CART",
-        forward: "payment",
-        backward: "bag",
-      },
-      payment: {
-        next: null,
-        back: "BACK TO SHIPPING",
-        forward: "confirmation",
-        backward: "shipping",
-      },
-      confirmation: {
-        next: "all done",
-        back: "BACK TO PAYMENT",
-        forward: null,
-        backward: "payment",
-      },
-    },
     totalCartPrice: "$5,000",
     shippingPageState: {
       addressTitle: "residential",
@@ -384,7 +360,6 @@ class Cart extends React.Component {
       promoCode,
       screenOnDisplay,
       shippingOption,
-      buttonDirection,
       shippingPageState,
       paymentPageState,
       error,

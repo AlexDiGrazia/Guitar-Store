@@ -834,3 +834,29 @@ export const halfArray = [
     paraText: "JVM210C 100W Combo Amp",
   },
 ];
+
+export const buttonDirection = {
+  bag: {
+    next: "CHECKOUT",
+    back: "BACK TO HOME",
+    forward: "shipping",
+  },
+  shipping: {
+    next: "CHECKOUT",
+    back: "BACK TO CART",
+    forward: "payment",
+    backward: "bag",
+  },
+  payment: {
+    next: null,
+    back: "BACK TO SHIPPING",
+    forward: "confirmation",
+    backward: "shipping",
+  },
+  confirmation: {
+    next: "all done",
+    back: "BACK TO PAYMENT",
+    forward: null,
+    backward: "payment",
+  },
+};
