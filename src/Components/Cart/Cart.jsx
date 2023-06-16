@@ -10,6 +10,7 @@ import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import Summary from "../Summary/Summary";
 import { stateAbbreviations } from "../../JS/constants";
 import {
   faCheck,
@@ -31,7 +32,6 @@ import {
   securityCodeValidation,
   CARDICON,
 } from "../../JS/creditCard";
-
 
 class Cart extends React.Component {
   state = {
@@ -401,69 +401,6 @@ class Cart extends React.Component {
 
     const { nextPage } = this.props;
 
-    const promoInputs = [
-      {
-        id: "promo",
-        type: "text",
-        name: "promo",
-        placeholder: "Code",
-        classList: style.promoCodeInput,
-        onChange: (e) => this.setState({ promoCode: e.target.value }),
-      },
-      {
-        id: "applyPromo",
-        type: "button",
-        name: "applyPromo",
-        value: "APPLY",
-        placeholder: null,
-        classList: style.applyPromoButton,
-        onClick: () => {
-          const percent = promoCode === "TWENTY" && 0.2;
-          this.setState({ discountPercentage: percent });
-        },
-      },
-    ];
-
-    const subTotal = Object.entries(quantity).reduce((total, [key, value]) => {
-      return total + value * price[key];
-    }, 0);
-
-    const discount = discountPercentage ? subTotal * discountPercentage : "-";
-
-    const freeOrExpressShipping = shippingOption === "free" ? 0 : 5;
-
-    const total =
-      (Number.isInteger(discount) ? subTotal - discount : subTotal) +
-      freeOrExpressShipping;
-
-    const invoiceInfo = [
-      {
-        name: "Cart:",
-        price: `${Object.values(this.state.quantity).reduce(
-          (a, b) => a + b
-        )} items`,
-      },
-      {
-        name: "Subtotal:",
-        price: formatToUSDCurrency(subTotal),
-      },
-      {
-        name: "Shipping & Handling:",
-        price:
-          shippingOption === "$5.00"
-            ? formatToUSDCurrency(freeOrExpressShipping)
-            : "-",
-      },
-      {
-        name: "Discount:",
-        price: formatToUSDCurrency(discount),
-      },
-      {
-        name: "Total:",
-        price: formatToUSDCurrency(total),
-      },
-    ];
-
     const componentsObject = {
       bag: (
         <Bag
@@ -503,7 +440,7 @@ class Cart extends React.Component {
     return (
       <div className={style.cart}>
         {
-          /* screenOnDisplay !== "confirmation" && */ <input
+          <input
             className={style.returnHome}
             type="button"
             onClick={() => {
@@ -523,226 +460,34 @@ class Cart extends React.Component {
             value={buttonDirection[screenOnDisplay]["back"]}
           />
         }
-        <ProgressBar progressBarIcons={progressBarIcons}/>
-
+        <ProgressBar progressBarIcons={progressBarIcons} />
         <div className={style.flexContainer}>
           <div className={style.left}>
             {componentsObject[screenOnDisplay]}
           </div>
           <div className={style.right}>
-            {/* To Do// created shared array */}
-            {/* Summary Component will go here */}
-            <h2 className={style.summary}>Summary</h2>
-            {screenOnDisplay !== "bag" && (
-              <p
-                className={`${style.seeCartItems} ${screenOnDisplay === 'confirmation' && style.marginBottom}`}
-                onClick={() => this.setHiddenOrRevealedState("cartItems")} /* rename 'showOrHide */
-              >
-                See cart Items
-              </p>
-            )}
-            <div className={hiddenOrRevealed.cartItems}>
-              {screenOnDisplay !== "bag" &&
-                cartItems.map((item) => (
-                  <div className={style.productWrapper}>
-                    <div className={style.summaryImgWrapper}>
-                      <img
-                        src={PHOTOS[item.photo]}
-                        alt={item.alt}
-                        className={style.summaryPhotos}
-                      />
-                    </div>
-                    <div className={style.productText}>
-                      <h6>{item.headerSixText}</h6>
-                      <p>{item.paraText}</p>
-                      <div className={style.qtyAndPriceFlexContainer}>
-                        <p>{`Qty: ${quantity[item.product]}`}</p>
-                        <p>
-                          {formatToUSDCurrency(
-                            quantity[item.product] * item.price
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-            {screenOnDisplay !== "confirmation" && (
-              <>
-                <h5 className={style.promoPrompt}>Do you have a Promo Code?</h5>
-                <div className={style.promoContainer}>
-                  {promoInputs.map((obj) => (
-                    <InputBase
-                      id={obj.id}
-                      type={obj.type}
-                      name={obj.name}
-                      value={obj.value}
-                      placeholder={obj.placeholder}
-                      classList={obj.classList}
-                      onClick={obj.onClick}
-                      onChange={obj.onChange}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-
-            <div className={style.cartInvoice}>
-              {invoiceInfo.map((obj) => (
-                <InvoiceLine name={obj.name} price={obj.price} />
-              ))}
-            </div>
-            {screenOnDisplay === "payment" && (
-              <div className={style.shipmentInfo}>
-                <h5
-                  onClick={() => this.setHiddenOrRevealedState("shipping")}
-                >
-                  View Shipment Details
-                </h5>
-                <div className={`${style.shipmentContainer} ${hiddenOrRevealed.shipping}`}>
-                  <p>{shippingPageState.fullName}</p>
-                  <p>{shippingPageState.streetAddress}</p>
-                  <p>
-                    <span>{shippingPageState.city}</span>,{" "}
-                    <span>
-                      {
-                        stateAbbreviations[
-                          shippingPageState.state.replace(/\s/g, "")
-                        ]
-                      }
-                    </span>{" "}
-                    <span>{shippingPageState.zipcode}</span>
-                  </p>
-                  <p>
-                    <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
-                    <span>
-                      {formatPhoneNumber(shippingPageState.cellPhoneNumber)}
-                    </span>
-                  </p>
-                  <p>{shippingPageState.addressTitle}</p>
-                </div>
-              </div>
-            )}
-
-            {screenOnDisplay === "confirmation" && (
-              // first one
-              <>
-                <div className={style.flexRow}>
-                  <div className={style.shippingMethod}>
-                    <h6>SHIPPING</h6>
-                    <div className={style.summaryContainer}>
-                      <h6>
-                        {shippingOption === "free" ? "Standard" : "Express"}
-                      </h6>
-                      <p>
-                        {"  "}
-                        Delivery in{" "}
-                        {shippingOption === "free" ? "4 - 6" : "1 - 3"} Business
-                        Days
-                      </p>
-                    </div>
-                  </div>
-                  <div className={style.shippingSummary}>
-                    <h5
-                      onClick={() => this.setHiddenOrRevealedState("shipping")}
-                    >
-                      View Shipping Details{" "}
-                    </h5>
-                    <div
-                      className={`${hiddenOrRevealed.shipping} ${style.shippingInfoContainer}`}
-                    >
-                      <p>{shippingPageState.fullName}</p>
-                      <p>{shippingPageState.streetAddress}</p>
-                      <p>
-                        <span>{shippingPageState.city}</span>,{" "}
-                        <span>
-                          {
-                            stateAbbreviations[
-                              shippingPageState.state.replace(/\s/g, "")
-                            ]
-                          }
-                        </span>{" "}
-                        <span>{shippingPageState.zipcode}</span>
-                      </p>
-                      <p>
-                        <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
-                        <span>
-                          {formatPhoneNumber(shippingPageState.cellPhoneNumber)}
-                        </span>
-                      </p>
-                      <p>{shippingPageState.addressTitle}</p>
-                    </div>
-                  </div>
-                </div>
-                {/* second one */}
-                <div className={style.flexRow}>
-                  <div className={style.shippingMethod}>
-                    <h6>PAYMENT</h6>
-                    <div className={style.cardInfoWrapper}>
-                      <h6 className={style.cardHeaderSix}>
-                        {
-                          <>
-                            <img
-                              className={style.creditCardIcon}
-                              src={CARDICON[cardType]}
-                              alt="card"
-                            ></img>
-                            {cardType}
-                          </>
-                        }
-                      </h6>
-                      <p>Total Payment: {formatToUSDCurrency(total)}</p>
-                    </div>
-                  </div>
-                  <div className={style.shippingSummary}>
-                    <h5
-                      onClick={() => this.setHiddenOrRevealedState("payment")}
-                    >
-                      View Payment Details{" "}
-                    </h5>
-                    <div
-                      className={`${hiddenOrRevealed.payment} ${style.shippingInfoContainer}`}
-                    >
-                      <div>
-                        xxxx-xxxx-xxxx-
-                        {getLastFourOfCreditCard(paymentPageState.cardNumber)}
-                      </div>
-                    </div>
-                  </div>
-                </div>{" "}
-              </>
-            )}
-
-            {screenOnDisplay !== "confirmation" && (
-              <input
-                className={style.nextShipping}
-                name="checkout"
-                type="button"
-                onClick={() => {
-                  // this.setErrorMessage(screenOnDisplay);
-                  // this.checkAllFieldsValid(screenOnDisplay) &&
-                  //   verifyNoErrors(error) &&
-                  this.progressBarIconStateSetter(
-                    buttonDirection[screenOnDisplay]["forward"],
-                    screenOnDisplay,
-                    "forward"
-                  );
-                  this.setDisplayScreen(
-                    buttonDirection[screenOnDisplay]["forward"]
-                  );
-                }}
-                onBlur={() => this.setState({ allFieldsValidError: "" })}
-                value={
-                  screenOnDisplay === "payment"
-                    ? `PAY  ${formatToUSDCurrency(total)}`
-                    : buttonDirection[screenOnDisplay]["next"]
-                }
-              />
-            )}
-            <br />
-            <label className={style.errorMessage} htmlFor="checkout">
-              {allFieldsValidError}
-            </label>
+            <Summary
+              screenOnDisplay={screenOnDisplay}
+              setDisplayScreen={this.setDisplayScreen}
+              hiddenOrRevealed={hiddenOrRevealed}
+              setHiddenOrRevealedState={this.setHiddenOrRevealedState}
+              quantity={quantity}
+              price={price}
+              discountPercentage={discountPercentage}
+              shippingOption={shippingOption}
+              buttonDirection={buttonDirection}
+              allFieldsValidError={allFieldsValidError}
+              handleState={this.handleState}
+              setErrorMessage={this.setErrorMessage}
+              checkAllFieldsValid={this.checkAllFieldsValid}
+              progressBarIconStateSetter={this.progressBarIconStateSetter}
+              cartItems={cartItems}
+              shippingPageState={shippingPageState}
+              cardType={cardType}
+              paymentPageState={paymentPageState}
+              promoCode={promoCode}
+              error={error}
+            />
           </div>
         </div>
       </div>

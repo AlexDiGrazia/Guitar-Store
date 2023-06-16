@@ -1,34 +1,136 @@
 import React from "react";
 import style from "./Summary.module.css";
+import InputBase from "../InputBase/InputBase";
+import InvoiceLine from "../InvoiceLine/InvoiceLine";
+import { stateAbbreviations } from "../../JS/constants";
+import { PHOTOS } from "../../Photos/photos";
+import {
+  formatPhoneNumber,
+  formatToUSDCurrency,
+  verifyAllFieldsComplete,
+  verifyNoErrors,
+  getLastFourOfCreditCard,
+} from "../../JS/functions";
+import {
+  cardNumberValidation,
+  findDebitCardType,
+  securityCodeValidation,
+  CARDICON,
+} from "../../JS/creditCard";
 
 class Summary extends React.Component {
   render() {
+    const {
+      screenOnDisplay,
+      hiddenOrRevealed,
+      quantity,
+      price,
+      discountPercentage,
+      shippingOption,
+      buttonDirection,
+      allFieldsValidError,
+      handleState,
+      setHiddenOrRevealedState,
+      setErrorMessage,
+      checkAllFieldsValid,
+      progressBarIconStateSetter,
+      setDisplayScreen,
+      cartItems,
+      shippingPageState,
+      cardType,
+      paymentPageState,
+      promoCode,
+      error,
+    } = this.props;
+
+    const promoInputs = [
+      {
+        id: "promo",
+        type: "text",
+        name: "promo",
+        placeholder: "Code",
+        classList: style.promoCodeInput,
+        onChange: (e) => handleState("promoCode", e.target.value),
+      },
+      {
+        id: "applyPromo",
+        type: "button",
+        name: "applyPromo",
+        value: "APPLY",
+        placeholder: null,
+        classList: style.applyPromoButton,
+        onClick: () => {
+          const percent = promoCode === "TWENTY" && 0.2;
+          handleState("discountPercentage", percent);
+        },
+      },
+    ];
+
+    const subTotal = Object.entries(quantity).reduce((total, [key, value]) => {
+      return total + value * price[key];
+    }, 0);
+
+    const discount = discountPercentage ? subTotal * discountPercentage : "-";
+
+    const freeOrExpressShipping = shippingOption === "free" ? 0 : 5;
+
+    const total =
+      (Number.isInteger(discount) ? subTotal - discount : subTotal) +
+      freeOrExpressShipping;
+
+    const invoiceInfo = [
+      {
+        name: "Cart:",
+        price: `${Object.values(this.props.quantity).reduce(
+          (a, b) => a + b
+        )} items`,
+      },
+      {
+        name: "Subtotal:",
+        price: formatToUSDCurrency(subTotal),
+      },
+      {
+        name: "Shipping & Handling:",
+        price:
+          shippingOption === "$5.00"
+            ? formatToUSDCurrency(freeOrExpressShipping)
+            : "-",
+      },
+      {
+        name: "Discount:",
+        price: formatToUSDCurrency(discount),
+      },
+      {
+        name: "Total:",
+        price: formatToUSDCurrency(total),
+      },
+    ];
+
     return (
       <>
         {/* To Do// created shared array */}
         <h2 className={style.summary}>Summary</h2>
         {screenOnDisplay !== "bag" && (
           <p
-            className={`${style.seeCartItems} ${
-              screenOnDisplay === "confirmation" && style.marginBottom
-            }`}
-            onClick={() => {
-              let display =
-                hiddenOrRevealed.cartItems === style.hidden
-                  ? style.reveal
-                  : style.hidden;
-              this.setState((prev) => ({
-                hiddenOrRevealed: {
-                  ...prev.hiddenOrRevealed,
-                  cartItems: display,
-                },
-              }));
-            }}
+            className={style.seeCartItems}
+            style={
+              true && 
+              { 
+              fontSize: "14px",
+              textDecoration: "underline",
+              marginBottom: screenOnDisplay === "confirmation" && '50px',
+            }
+          }
+            
+            onClick={() => setHiddenOrRevealedState("cartItems")}
           >
             See cart Items
           </p>
         )}
-        <div className={hiddenOrRevealed.cartItems}>
+        <div 
+          className={hiddenOrRevealed.cartItems}
+          style={{marginBottom: hiddenOrRevealed.cartItems === '_reveal_1cnzb_92' && '35px'}}
+          >
           {screenOnDisplay !== "bag" &&
             cartItems.map((item) => (
               <div className={style.productWrapper}>
@@ -79,20 +181,7 @@ class Summary extends React.Component {
         </div>
         {screenOnDisplay === "payment" && (
           <div className={style.shipmentInfo}>
-            <h5
-              onClick={() => {
-                let display =
-                  hiddenOrRevealed.shipping === style.hidden
-                    ? style.reveal
-                    : style.hidden;
-                this.setState((prev) => ({
-                  hiddenOrRevealed: {
-                    ...prev.hiddenOrRevealed,
-                    shipping: display,
-                  },
-                }));
-              }}
-            >
+            <h5 onClick={() => setHiddenOrRevealedState("shipping")}>
               Shipment Address
             </h5>
             <div className={`${style.shipmentContainer}`}>
@@ -138,7 +227,7 @@ class Summary extends React.Component {
                 </div>
               </div>
               <div className={style.shippingSummary}>
-                <h5 onClick={() => this.setHiddenOrRevealedState("shipping")}>
+                <h5 onClick={() => setHiddenOrRevealedState("shipping")}>
                   View Shipping Details{" "}
                 </h5>
                 <div
@@ -188,7 +277,7 @@ class Summary extends React.Component {
                 </div>
               </div>
               <div className={style.shippingSummary}>
-                <h5 onClick={() => this.setHiddenOrRevealedState("payment")}>
+                <h5 onClick={() => setHiddenOrRevealedState("payment")}>
                   View Payment Details{" "}
                 </h5>
                 <div
@@ -210,19 +299,17 @@ class Summary extends React.Component {
             name="checkout"
             type="button"
             onClick={() => {
-              // this.setErrorMessage(screenOnDisplay);
-              // this.checkAllFieldsValid(screenOnDisplay) &&
+              // setErrorMessage(screenOnDisplay);
+              // checkAllFieldsValid(screenOnDisplay) &&
               //   verifyNoErrors(error) &&
-              this.progressBarIconStateSetter(
+              progressBarIconStateSetter(
                 buttonDirection[screenOnDisplay]["forward"],
                 screenOnDisplay,
                 "forward"
               );
-              this.setDisplayScreen(
-                buttonDirection[screenOnDisplay]["forward"]
-              );
+              setDisplayScreen(buttonDirection[screenOnDisplay]["forward"]);
             }}
-            onBlur={() => this.setState({ allFieldsValidError: "" })}
+            onBlur={() => handleState("allFieldsValidError", "")}
             value={
               screenOnDisplay === "payment"
                 ? `PAY  ${formatToUSDCurrency(total)}`

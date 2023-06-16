@@ -1,0 +1,175 @@
+
+
+.flexRow {
+  display: flex;
+  margin-top: 34px;
+  justify-content: space-between;
+}
+
+.flexRow .shippingMethod {
+  margin-right: 36px;
+  width: 61%;
+}
+
+.flexRow .shippingSummary .shippingInfoContainer p {
+  margin: 0;
+}
+
+.flexRow .shippingSummary h5 {
+  text-decoration: underline;
+  margin: 6px 0;
+}
+
+.flexRow .shippingMethod p {
+  display: inline-block;
+}
+
+.flexRow p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.summaryContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexRow h6 {
+  font-size: 16px;
+  display: inline-block;
+  margin: 6px 0;
+}
+
+.cartInvoice {
+  margin-bottom: 20px;
+}
+
+.summary {
+  margin-top: 0;
+  text-align: right;
+}
+
+.summaryImgWrapper {
+  width: 75px;
+  height: 75px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.summaryPhotos {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+p.seeCartItems,
+.shipmentInfo h5 {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.cartItemsMarginBottom {
+  margin-bottom: 35px;
+}
+
+.productWrapper {
+  display: flex;
+  background: #4a474747;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  box-shadow: 0 6px 17px -10px black;
+}
+
+.productText {
+  padding-left: 8px;
+  width: 100%;
+}
+
+.productText h6 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 16px;
+}
+
+.productText p {
+  margin: 0px 0 0px;
+  font-size: 14px;
+}
+
+.qtyAndPriceFlexContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.promoContainer {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.promoPrompt {
+  margin-bottom: 7px;
+}
+
+.promoCodeInput {
+  max-width: 200px;
+  width: 89%;
+}
+
+.applyPromoButton {
+  /* width: fit-content; */
+  background-color: #b66565;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+p {
+  color: white;
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+.shipmentInfo {
+  margin-bottom: 20px;
+}
+
+.shipmentInfo p {
+  font-size: 16px;
+  margin-bottom: 1px;
+}
+
+.nextShipping {
+  background-color: #b66565;
+  padding: 10px 71px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 3px;
+}
+
+.errorMessage {
+  max-width: 89%;
+  color: #7e1e1e;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0;
+  text-shadow: 0px 0px 25px #ffffff61;
+  font-size: 16px;
+}
+
+.creditCardIcon {
+  max-width: 30px;
+}
+
+.flexRow .cardHeaderSix {
+  display: inline-flex;
+}
+
+.flexRow .shippingMethod .cardInfoWrapper {
+  display: flex !important;
+  justify-content: space-between;
+  width: 106%;
+}
