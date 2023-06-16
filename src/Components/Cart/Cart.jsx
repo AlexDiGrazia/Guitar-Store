@@ -17,10 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   formatPhoneNumber,
-  formatToUSDCurrency,
   verifyAllFieldsComplete,
   verifyNoErrors,
-  getLastFourOfCreditCard,
 } from "../../JS/functions";
 import {
   cardNumberValidation,
