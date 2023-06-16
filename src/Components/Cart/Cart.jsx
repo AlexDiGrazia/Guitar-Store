@@ -1,17 +1,12 @@
 import React from "react";
 import style from "./Cart.module.css";
-// import CartItem from "../CartItem/CartItem";
-import { PHOTOS } from "../../Photos/photos";
 import { itemsArray } from "../../JS/constants";
-import InputBase from "../InputBase/InputBase";
-import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import Bag from "../Bag/Bag";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Summary from "../Summary/Summary";
-import { stateAbbreviations } from "../../JS/constants";
 import {
   faCheck,
   faTruck,
