@@ -44,7 +44,6 @@ class Shipping extends React.Component {
       handleState,
       nestedStateObjectSetter,
       shippingPageState,
-      phoneNumberStateSetter,
     } = this.props;
 
     const inputsArray = [
@@ -137,7 +136,12 @@ class Shipping extends React.Component {
           id: "cellphone",
           type: "text",
           classList: style.phoneNumber,
-          onChange: (e) => phoneNumberStateSetter(e, "cellPhoneNumber"),
+          onChange: (e) =>
+            nestedStateObjectSetter(
+              "shippingPageState",
+              "cellPhoneNumber",
+              formatPhoneNumber(e)
+            ),
           value: shippingPageState.cellPhoneNumber,
           maxLength: 7,
         },
@@ -165,7 +169,12 @@ class Shipping extends React.Component {
           id: "telephone",
           type: "text",
           classList: style.phoneNumber,
-          onChange: (e) => phoneNumberStateSetter(e, "telephoneNumber"),
+          onChange: (e) =>
+            nestedStateObjectSetter(
+              "shippingPageState",
+              "telephoneNumber",
+              formatPhoneNumber(e)
+            ),
           value: shippingPageState.telephoneNumber,
           maxLength: 7,
         },

@@ -63,7 +63,7 @@ class Cart extends React.Component {
       streetAddress: "57335 Seneca Valley Rd.",
       zipcode: "32577",
       cellPhoneAreaCode: "935",
-      cellPhoneNumber: "7852334",
+      cellPhoneNumber: "785 - 2334",
       teleAreaCode: "",
       telephoneNumber: "",
       country: "USA",
@@ -235,18 +235,6 @@ class Cart extends React.Component {
     }));
   };
 
-  phoneNumberStateSetter = (e, state) => {
-    let mask = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
-    if (mask.length) {
-      mask = formatPhoneNumber(mask);
-    }
-    this.setState((prev) => ({
-      shippingPageState: {
-        ...prev.shippingPageState,
-        [state]: mask,
-      },
-    }));
-  };
 
   maskCreditCard = (e) => {
     let mask = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
@@ -366,7 +354,6 @@ class Cart extends React.Component {
           handleState={this.handleState}
           nestedStateObjectSetter={this.nestedStateObjectSetter}
           shippingPageState={shippingPageState}
-          phoneNumberStateSetter={this.phoneNumberStateSetter}
         />
       ),
       payment: (

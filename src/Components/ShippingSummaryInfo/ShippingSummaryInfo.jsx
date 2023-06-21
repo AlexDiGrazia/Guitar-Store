@@ -17,8 +17,8 @@ class ShippingSummaryInfo extends React.Component {
           <span>{shippingPageState.zipcode}</span>
         </p>
         <p>
-          <span>{shippingPageState.cellPhoneAreaCode}</span>{" "}
-          <span>{formatPhoneNumber(shippingPageState.cellPhoneNumber)}</span>
+          <span>{`(${shippingPageState.cellPhoneAreaCode})`}</span>{" "}
+          <span>{shippingPageState.cellPhoneNumber}</span>
         </p>
         <p>{shippingPageState.addressTitle}</p>
       </>
