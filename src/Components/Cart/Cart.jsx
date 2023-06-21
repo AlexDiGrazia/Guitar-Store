@@ -235,15 +235,6 @@ class Cart extends React.Component {
     }));
   };
 
-  handleShippingState = (key, value) => {
-    this.setState((prev) => ({
-      shippingPageState: {
-        ...prev.shippingPageState,
-        [key]: value,
-      },
-    }));
-  };
-
   ensureNumbers = (e, state) => {
     Number.isInteger(+e.target.value)
       ? this.setState((prev) => ({
@@ -384,7 +375,7 @@ class Cart extends React.Component {
         <Shipping
           setDisplayScreen={(component) => this.setDisplayScreen(component)}
           handleState={this.handleState}
-          handleShippingState={this.handleShippingState}
+          nestedStateObjectSetter={this.nestedStateObjectSetter}
           ensureNumbers={this.ensureNumbers}
           shippingPageState={shippingPageState}
           phoneNumberStateSetter={this.phoneNumberStateSetter}

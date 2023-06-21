@@ -42,7 +42,7 @@ class Shipping extends React.Component {
     const {
       setDisplayScreen,
       handleState,
-      handleShippingState,
+      nestedStateObjectSetter,
       ensureNumbers,
       shippingPageState,
       phoneNumberStateSetter
@@ -55,7 +55,7 @@ class Shipping extends React.Component {
         text: "Address title",
         classList: style.inputWidth,
         labelClassList: style.label,
-        onChange: (e) => handleShippingState("addressTitle", e.target.value),
+        onChange: (e) => nestedStateObjectSetter('shippingPageState', "addressTitle", e.target.value),
         value: shippingPageState.addressTitle,
       },
       {
@@ -64,7 +64,7 @@ class Shipping extends React.Component {
         text: "Full Name",
         classList: style.inputWidth,
         labelClassList: style.label,
-        onChange: (e) => handleShippingState("fullName", e.target.value),
+        onChange: (e) => nestedStateObjectSetter('shippingPageState', "fullName", e.target.value),
         value: shippingPageState.fullName,
       },
       {
@@ -73,7 +73,7 @@ class Shipping extends React.Component {
         text: "Street Address",
         classList: style.biggerInputWidth,
         labelClassList: style.label,
-        onChange: (e) => handleShippingState("streetAddress", e.target.value),
+        onChange: (e) => nestedStateObjectSetter('shippingPageState', "streetAddress", e.target.value),
         value: shippingPageState.streetAddress,
       },
     ];
@@ -186,7 +186,7 @@ class Shipping extends React.Component {
                 array={obj.array}
                 selected={obj.selected}
                 value={shippingPageState[obj.value]}
-                onChange={(e) => handleShippingState([obj.value], e.target.value )}
+                onChange={(e) => nestedStateObjectSetter('shippingPageState', [obj.value], e.target.value )}
                 disabled={shippingPageState[obj.value]}
               />
             ))}
