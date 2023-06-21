@@ -43,9 +43,8 @@ class Shipping extends React.Component {
       setDisplayScreen,
       handleState,
       nestedStateObjectSetter,
-      ensureNumbers,
       shippingPageState,
-      phoneNumberStateSetter
+      phoneNumberStateSetter,
     } = this.props;
 
     const inputsArray = [
@@ -55,7 +54,12 @@ class Shipping extends React.Component {
         text: "Address title",
         classList: style.inputWidth,
         labelClassList: style.label,
-        onChange: (e) => nestedStateObjectSetter('shippingPageState', "addressTitle", e.target.value),
+        onChange: (e) =>
+          nestedStateObjectSetter(
+            "shippingPageState",
+            "addressTitle",
+            e.target.value
+          ),
         value: shippingPageState.addressTitle,
       },
       {
@@ -64,7 +68,12 @@ class Shipping extends React.Component {
         text: "Full Name",
         classList: style.inputWidth,
         labelClassList: style.label,
-        onChange: (e) => nestedStateObjectSetter('shippingPageState', "fullName", e.target.value),
+        onChange: (e) =>
+          nestedStateObjectSetter(
+            "shippingPageState",
+            "fullName",
+            e.target.value
+          ),
         value: shippingPageState.fullName,
       },
       {
@@ -73,7 +82,12 @@ class Shipping extends React.Component {
         text: "Street Address",
         classList: style.biggerInputWidth,
         labelClassList: style.label,
-        onChange: (e) => nestedStateObjectSetter('shippingPageState', "streetAddress", e.target.value),
+        onChange: (e) =>
+          nestedStateObjectSetter(
+            "shippingPageState",
+            "streetAddress",
+            e.target.value
+          ),
         value: shippingPageState.streetAddress,
       },
     ];
@@ -86,7 +100,14 @@ class Shipping extends React.Component {
         classList: style.shortInputWidth,
         labelClassList: style.label,
         shortDiv: style.shortDiv,
-        onChange: (e) => ensureNumbers(e, "zipcode"),
+        onChange: (e) => {
+          Number.isInteger(+e.target.value) &&
+            nestedStateObjectSetter(
+              "shippingPageState",
+              "zipcode",
+              e.target.value.replace(/\s/g, "")
+            );
+        },
         value: shippingPageState.zipcode,
         maxLength: 5,
       },
@@ -101,7 +122,14 @@ class Shipping extends React.Component {
           classList: style.areaCode,
           labelClassList: style.label,
           shortDiv: style.shortDiv,
-          onChange: (e) => ensureNumbers(e, "cellPhoneAreaCode"),
+          onChange: (e) => {
+            Number.isInteger(+e.target.value) &&
+              nestedStateObjectSetter(
+                "shippingPageState",
+                "cellPhoneAreaCode",
+                e.target.value.replace(/\s/g, "")
+              );
+          },
           value: shippingPageState.cellPhoneAreaCode,
           maxLength: 3,
         },
@@ -122,7 +150,14 @@ class Shipping extends React.Component {
           classList: style.areaCode,
           labelClassList: style.label,
           shortDiv: style.shortDiv,
-          onChange: (e) => ensureNumbers(e, "teleAreaCode"),
+          onChange: (e) => {
+            Number.isInteger(+e.target.value) &&
+              nestedStateObjectSetter(
+                "shippingPageState",
+                "teleAreaCode",
+                e.target.value.replace(/\s/g, "")
+              );
+          },
           value: shippingPageState.teleAreaCode,
           maxLength: 3,
         },
@@ -186,7 +221,13 @@ class Shipping extends React.Component {
                 array={obj.array}
                 selected={obj.selected}
                 value={shippingPageState[obj.value]}
-                onChange={(e) => nestedStateObjectSetter('shippingPageState', [obj.value], e.target.value )}
+                onChange={(e) =>
+                  nestedStateObjectSetter(
+                    "shippingPageState",
+                    [obj.value],
+                    e.target.value
+                  )
+                }
                 disabled={shippingPageState[obj.value]}
               />
             ))}
@@ -218,4 +259,3 @@ class Shipping extends React.Component {
 }
 
 export default Shipping;
-

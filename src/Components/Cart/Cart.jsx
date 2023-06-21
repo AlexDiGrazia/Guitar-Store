@@ -235,17 +235,6 @@ class Cart extends React.Component {
     }));
   };
 
-  ensureNumbers = (e, state) => {
-    Number.isInteger(+e.target.value)
-      ? this.setState((prev) => ({
-          shippingPageState: {
-            ...prev.shippingPageState,
-            [state]: e.target.value.replace(/\s/g, ""),
-          },
-        }))
-      : null;
-  };
-
   phoneNumberStateSetter = (e, state) => {
     let mask = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
     if (mask.length) {
@@ -376,7 +365,6 @@ class Cart extends React.Component {
           setDisplayScreen={(component) => this.setDisplayScreen(component)}
           handleState={this.handleState}
           nestedStateObjectSetter={this.nestedStateObjectSetter}
-          ensureNumbers={this.ensureNumbers}
           shippingPageState={shippingPageState}
           phoneNumberStateSetter={this.phoneNumberStateSetter}
         />
