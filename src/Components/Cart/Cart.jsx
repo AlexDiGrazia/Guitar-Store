@@ -113,6 +113,19 @@ class Cart extends React.Component {
     },
   };
 
+  handleState = (key, value) => {
+    this.setState({ [key]: value });
+  };
+
+  nestedStateObjectSetter = (object, key, value) => {
+    this.setState((prev) => ({
+      [object]: {
+        ...prev[object],
+        [key]: value,
+      },
+    }));
+  };
+
   setHiddenOrRevealed = (key) => {
     const { hiddenOrRevealed } = this.state;
     let display =
@@ -180,9 +193,7 @@ class Cart extends React.Component {
     }));
   };
 
-  handleState = (key, value) => {
-    this.setState({ [key]: value });
-  };
+
 
   handleBlur = (value, type) => {
     let errorText;
@@ -208,34 +219,16 @@ class Cart extends React.Component {
     }
   };
 
-  nestedStateObjectSetter = (object, key, value) => {
-    this.setState((prev) => ({
-      [object]: {
-        ...prev[object],
-        [key]: value,
-      },
-    }));
-  };
+
 
   maskCreditCard = (e) => {
-    let mask = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
-    if (mask.length) {
-      mask = mask.match(new RegExp(".{1,4}", "g")).join(" ");
-      this.setState((prev) => ({
-        paymentPageState: {
-          ...prev.paymentPageState,
-          cardNumber: mask,
-        },
-      }));
-    } else {
-      this.setState((prev) => ({
-        paymentPageState: {
-          ...prev.paymentPageState,
-          cardNumber: "",
-        },
-      }));
-    }
+    let string = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
+    let mask = string.length && string.match(new RegExp(".{1,4}", "g")).join(" ");
+    string.length
+      ? this.nestedStateObjectSetter("paymentPageState", "cardNumber", mask)
+      : this.nestedStateObjectSetter("paymentPageState", "cardNumber", "");
   };
+
 
   getCartTotal = () => {
     return Object.values(this.state.quantity).reduce((a, b) => a + b);
