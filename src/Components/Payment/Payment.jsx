@@ -132,7 +132,7 @@ class Payment extends React.Component {
             "expirationMonth",
             e.target.value
           ),
-        value: 'expirationMonth',  
+        value: "expirationMonth",
       },
       {
         htmlFor: "Exp.Date",
@@ -145,7 +145,7 @@ class Payment extends React.Component {
             "expirationYear",
             e.target.value
           ),
-          value: 'expirationYear',
+        value: "expirationYear",
       },
     ];
 
@@ -171,13 +171,11 @@ class Payment extends React.Component {
             <FontAwesomeIcon
               className={style.questionMarkIcon}
               icon={faCircleQuestion}
-              onMouseOver={() => handleState( "cvvInfo", "displayBlock" )}
-              onMouseOut={() => handleState( "cvvInfo", "displayNone" )}
+              onMouseOver={() => handleState("cvvInfo", "displayBlock")}
+              onMouseOut={() => handleState("cvvInfo", "displayNone")}
             />
           </div>
-          <div
-            className={`${style[cvvInfo]} ${style.cvvInfo}`}
-          ></div>
+          <div className={`${style[cvvInfo]} ${style.cvvInfo}`}></div>
         </div>
       </div>
     );

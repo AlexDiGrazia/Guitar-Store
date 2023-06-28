@@ -113,29 +113,12 @@ class Cart extends React.Component {
     },
   };
 
-  // removeItem = (product) => {
-  //   this.setState({
-  //     display: {
-  //       ...this.state.display,
-  //       [product]: "none",
-  //     },
-  //     quantity: {
-  //       ...this.state.quantity,
-  //       [product]: 0,
-  //     },
-  //   });
-  // };
 
-  setHiddenOrRevealedState = (key) => {
+  setHiddenOrRevealed = (key) => {
     const { hiddenOrRevealed } = this.state;
     let display =
       hiddenOrRevealed[key] === style.hidden ? style.reveal : style.hidden;
-    this.setState((prev) => ({
-      hiddenOrRevealed: {
-        ...prev.hiddenOrRevealed,
-        [key]: display,
-      },
-    }));
+    return display;
   };
 
   setCartItemsState = (cartItem) => {
@@ -234,7 +217,6 @@ class Cart extends React.Component {
       },
     }));
   };
-
 
   maskCreditCard = (e) => {
     let mask = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
@@ -396,15 +378,13 @@ class Cart extends React.Component {
         }
         <ProgressBar progressBarIcons={progressBarIcons} />
         <div className={style.flexContainer}>
-          <div className={style.left}>
-            {componentsObject[screenOnDisplay]}
-          </div>
+          <div className={style.left}>{componentsObject[screenOnDisplay]}</div>
           <div className={style.right}>
             <Summary
               screenOnDisplay={screenOnDisplay}
               setDisplayScreen={this.setDisplayScreen}
               hiddenOrRevealed={hiddenOrRevealed}
-              setHiddenOrRevealedState={this.setHiddenOrRevealedState}
+              nestedStateObjectSetter={this.nestedStateObjectSetter}
               quantity={quantity}
               price={price}
               discountPercentage={discountPercentage}
@@ -421,6 +401,7 @@ class Cart extends React.Component {
               paymentPageState={paymentPageState}
               promoCode={promoCode}
               error={error}
+              setHiddenOrRevealed={this.setHiddenOrRevealed}
             />
           </div>
         </div>

@@ -32,3 +32,16 @@
 //             confirmPassword: 'Password and Confirmation Password must match',
 //           }}));
 //         }
+
+  // removeItem = (product) => {
+  //   this.setState({
+  //     display: {
+  //       ...this.state.display,
+  //       [product]: "none",
+  //     },
+  //     quantity: {
+  //       ...this.state.quantity,
+  //       [product]: 0,
+  //     },
+  //   });
+  // };
