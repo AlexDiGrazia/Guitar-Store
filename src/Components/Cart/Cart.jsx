@@ -126,11 +126,20 @@ class Cart extends React.Component {
     }));
   };
 
-  setHiddenOrRevealed = (key) => {
+  setHiddenOrRevealedState = (key) => {
     const { hiddenOrRevealed } = this.state;
-    let display =
-      hiddenOrRevealed[key] === style.hidden ? style.reveal : style.hidden;
-    return display;
+    let display = hiddenOrRevealed[key] === style.hidden 
+      ? style.reveal 
+      : style.hidden;
+    this.nestedStateObjectSetter("hiddenOrRevealed", key, display);
+  };
+
+  maskCreditCard = (e) => {
+    let string = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
+    let mask = string.length
+      ? string.match(new RegExp(".{1,4}", "g")).join(" ")
+      : "";
+    this.nestedStateObjectSetter("paymentPageState", "cardNumber", mask);
   };
 
   setCartItemsState = (cartItem) => {
@@ -193,8 +202,6 @@ class Cart extends React.Component {
     }));
   };
 
-
-
   handleBlur = (value, type) => {
     let errorText;
     switch (type) {
@@ -218,17 +225,6 @@ class Cart extends React.Component {
         break;
     }
   };
-
-
-
-  maskCreditCard = (e) => {
-    let string = e.target.value.replace(/\s/g, "").replace(/[^0-9]/g, "");
-    let mask = string.length && string.match(new RegExp(".{1,4}", "g")).join(" ");
-    string.length
-      ? this.nestedStateObjectSetter("paymentPageState", "cardNumber", mask)
-      : this.nestedStateObjectSetter("paymentPageState", "cardNumber", "");
-  };
-
 
   getCartTotal = () => {
     return Object.values(this.state.quantity).reduce((a, b) => a + b);
@@ -362,7 +358,6 @@ class Cart extends React.Component {
             <Summary
               screenOnDisplay={screenOnDisplay}
               hiddenOrRevealed={hiddenOrRevealed}
-              nestedStateObjectSetter={this.nestedStateObjectSetter}
               quantity={quantity}
               price={price}
               discountPercentage={discountPercentage}
@@ -379,7 +374,7 @@ class Cart extends React.Component {
               paymentPageState={paymentPageState}
               promoCode={promoCode}
               error={error}
-              setHiddenOrRevealed={this.setHiddenOrRevealed}
+              setHiddenOrRevealedState={this.setHiddenOrRevealedState}
             />
           </div>
         </div>

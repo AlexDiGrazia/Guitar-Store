@@ -23,7 +23,6 @@ class Summary extends React.Component {
       buttonDirection,
       allFieldsValidError,
       handleState,
-      nestedStateObjectSetter,
       setErrorMessage,
       checkAllFieldsValid,
       progressBarIconStateSetter,
@@ -33,7 +32,7 @@ class Summary extends React.Component {
       paymentPageState,
       promoCode,
       error,
-      setHiddenOrRevealed,
+      setHiddenOrRevealedState,
     } = this.props;
 
     const promoInputs = [
@@ -112,13 +111,7 @@ class Summary extends React.Component {
               textDecoration: "underline",
               marginBottom: screenOnDisplay === "confirmation" && "50px",
             }}
-            onClick={() => {
-              nestedStateObjectSetter(
-                "hiddenOrRevealed",
-                "cartItems",
-                setHiddenOrRevealed("cartItems")
-              );
-            }}
+            onClick={() => setHiddenOrRevealedState("cartItems")}
           >
             See cart Items
           </p>
@@ -181,15 +174,7 @@ class Summary extends React.Component {
         {/* Shipping Info when on Payment Page*/}
         {screenOnDisplay === "payment" && (
           <div className={style.shipmentInfo}>
-            <h5
-              onClick={() => {
-                nestedStateObjectSetter(
-                  "hiddenOrRevealed",
-                  "shipping",
-                  setHiddenOrRevealed("shipping")
-                );
-              }}
-            >
+            <h5 onClick={() => setHiddenOrRevealedState("shipping")}>
               Shipment Address
             </h5>
             <div className={`${style.shipmentContainer}`}>
@@ -217,15 +202,7 @@ class Summary extends React.Component {
                 </div>
               </div>
               <div className={style.shippingSummary}>
-                <h5
-                  onClick={() => {
-                    nestedStateObjectSetter(
-                      "hiddenOrRevealed",
-                      "shipping",
-                      setHiddenOrRevealed("shipping")
-                    );
-                  }}
-                >
+                <h5 onClick={() => setHiddenOrRevealedState("shipping")}>
                   View Shipping Details{" "}
                 </h5>
                 <div
@@ -256,15 +233,7 @@ class Summary extends React.Component {
                 </div>
               </div>
               <div className={style.shippingSummary}>
-                <h5
-                  onClick={() => {
-                    nestedStateObjectSetter(
-                      "hiddenOrRevealed",
-                      "payment",
-                      setHiddenOrRevealed("payment")
-                    );
-                  }}
-                >
+                <h5 onClick={() => setHiddenOrRevealedState("payment")}>
                   View Payment Details{" "}
                 </h5>
                 <div
