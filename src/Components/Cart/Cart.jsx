@@ -237,17 +237,6 @@ class Cart extends React.Component {
     }
   };
 
-
-
-  setQuantity = (e, product) => {
-    this.setState((prevState) => ({
-      quantity: {
-        ...prevState.quantity,
-        [product]: +e.target.value,
-      },
-    }));
-  };
-
   getCartTotal = () => {
     return Object.values(this.state.quantity).reduce((a, b) => a + b);
   };
@@ -322,9 +311,9 @@ class Cart extends React.Component {
           cartItems={cartItems}
           display={display}
           quantity={quantity}
-          setQuantity={(e, product) => this.setQuantity(e, product)}
           removeItem={(product) => this.removeItem(product)}
           setCartItemsState={this.setCartItemsState}
+          nestedStateObjectSetter={this.nestedStateObjectSetter}
         />
       ),
       shipping: (

@@ -16,11 +16,12 @@ class CartItem extends React.Component {
       productHeader,
       priceHeader,
       imgClassName,
-      selectorOnChange,
+      // selectorOnChange,
       quantity,
       removeItem,
       cartItem,
       setCartItemsState,
+      nestedStateObjectSetter,
     } = this.props;
     return (
       <div className={style.item}>
@@ -45,7 +46,7 @@ class CartItem extends React.Component {
               defaultValue={quantity}
               name={selectName}
               id={selectId}
-              onChange={selectorOnChange}
+              onChange={nestedStateObjectSetter}
             >
               <option value="0">0</option>
               <option value="1">1</option>

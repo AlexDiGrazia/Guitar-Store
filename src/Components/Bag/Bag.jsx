@@ -6,7 +6,14 @@ import { formatToUSDCurrency } from "../../JS/functions";
 
 class Bag extends React.Component {
   render() {
-    const { display, quantity, setQuantity, removeItem, setCartItemsState, cartItems, } = this.props;
+    const {
+      display,
+      quantity,
+      removeItem,
+      setCartItemsState,
+      cartItems,
+      nestedStateObjectSetter,
+    } = this.props;
 
     return (
       <div>
@@ -29,7 +36,13 @@ class Bag extends React.Component {
                 price={item.price}
                 selectName="item-quantity"
                 selectId="item-quantity"
-                selectorOnChange={(e) => setQuantity(e, item.product)}
+                nestedStateObjectSetter={(e) =>
+                  nestedStateObjectSetter(
+                    "quantity",
+                    item.product,
+                    +e.target.value
+                  )
+                }
                 quantity={quantity[item.product]}
                 removeItem={() => removeItem(item.product)}
                 setErrorMessage={() => this.setErrorMessage()}
