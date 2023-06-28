@@ -40,7 +40,6 @@ class Shipping extends React.Component {
 
   render() {
     const {
-      setDisplayScreen,
       handleState,
       nestedStateObjectSetter,
       shippingPageState,

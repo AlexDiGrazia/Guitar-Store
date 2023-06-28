@@ -27,7 +27,6 @@ class Summary extends React.Component {
       setErrorMessage,
       checkAllFieldsValid,
       progressBarIconStateSetter,
-      setDisplayScreen,
       cartItems,
       shippingPageState,
       cardType,
@@ -296,7 +295,10 @@ class Summary extends React.Component {
                 screenOnDisplay,
                 "forward"
               );
-              setDisplayScreen(buttonDirection[screenOnDisplay]["forward"]);
+              handleState(
+                "screenOnDisplay",
+                buttonDirection[screenOnDisplay]["forward"]
+              );
             }}
             onBlur={() => handleState("allFieldsValidError", "")}
             value={

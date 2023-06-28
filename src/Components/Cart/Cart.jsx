@@ -113,7 +113,6 @@ class Cart extends React.Component {
     },
   };
 
-
   setHiddenOrRevealed = (key) => {
     const { hiddenOrRevealed } = this.state;
     let display =
@@ -238,9 +237,7 @@ class Cart extends React.Component {
     }
   };
 
-  setDisplayScreen = (component) => {
-    this.setState({ screenOnDisplay: component });
-  };
+
 
   setQuantity = (e, product) => {
     this.setState((prevState) => ({
@@ -332,7 +329,6 @@ class Cart extends React.Component {
       ),
       shipping: (
         <Shipping
-          setDisplayScreen={(component) => this.setDisplayScreen(component)}
           handleState={this.handleState}
           nestedStateObjectSetter={this.nestedStateObjectSetter}
           shippingPageState={shippingPageState}
@@ -368,7 +364,8 @@ class Cart extends React.Component {
                   buttonDirection[screenOnDisplay]["backward"],
                   "backwards"
                 );
-                this.setDisplayScreen(
+                this.handleState(
+                  "screenOnDisplay",
                   buttonDirection[screenOnDisplay]["backward"]
                 );
               }
@@ -382,7 +379,6 @@ class Cart extends React.Component {
           <div className={style.right}>
             <Summary
               screenOnDisplay={screenOnDisplay}
-              setDisplayScreen={this.setDisplayScreen}
               hiddenOrRevealed={hiddenOrRevealed}
               nestedStateObjectSetter={this.nestedStateObjectSetter}
               quantity={quantity}
