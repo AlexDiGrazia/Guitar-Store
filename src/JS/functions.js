@@ -49,3 +49,7 @@ export const verifyNoErrors = (stateObj) => {
 export const getLastFourOfCreditCard = (str) => {
   return str.replace(/\s/g, "").slice(str.length - 7, str.length);
 };
+
+export const getCartTotal = (str) => {
+  return Object.values(str).reduce((a, b) => a + b);
+};

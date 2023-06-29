@@ -1,5 +1,4 @@
 import React from "react";
-import { formatPhoneNumber } from "../../JS/functions";
 import { stateAbbreviations } from "../../JS/constants";
 
 class ShippingSummaryInfo extends React.Component {

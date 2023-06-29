@@ -256,18 +256,18 @@ class Summary extends React.Component {
             name="checkout"
             type="button"
             onClick={() => {
-              // setErrorMessage(screenOnDisplay);
-              // checkAllFieldsValid(screenOnDisplay) &&
-              //   verifyNoErrors(error) &&
-              progressBarIconStateSetter(
-                buttonDirection[screenOnDisplay]["forward"],
-                screenOnDisplay,
-                "forward"
-              );
+              setErrorMessage(screenOnDisplay);
+              checkAllFieldsValid(screenOnDisplay) &&
+                verifyNoErrors(error) &&
+                (progressBarIconStateSetter(
+                  buttonDirection[screenOnDisplay]["forward"],
+                  screenOnDisplay,
+                  "forward"
+                ),
               handleState(
                 "screenOnDisplay",
                 buttonDirection[screenOnDisplay]["forward"]
-              );
+              ));
             }}
             onBlur={() => handleState("allFieldsValidError", "")}
             value={

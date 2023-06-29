@@ -16,15 +16,14 @@ import {
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  formatPhoneNumber,
   verifyAllFieldsComplete,
   verifyNoErrors,
+  getCartTotal,
 } from "../../JS/functions";
 import {
   cardNumberValidation,
   findDebitCardType,
   securityCodeValidation,
-  CARDICON,
 } from "../../JS/creditCard";
 
 class Cart extends React.Component {
@@ -226,16 +225,12 @@ class Cart extends React.Component {
     }
   };
 
-  getCartTotal = () => {
-    return Object.values(this.state.quantity).reduce((a, b) => a + b);
-  };
-
   setErrorMessage = (type) => {
-    const { paymentPageState, error } = this.state;
+    const { paymentPageState, error, quantity } = this.state;
     let errorMessage;
     switch (type) {
       case "bag":
-        errorMessage = this.getCartTotal() === 0 && "No items in cart";
+        errorMessage = getCartTotal(quantity) === 0 && "No items in cart";
         break;
       case "shipping":
         let allFieldsComplete = true;
@@ -255,10 +250,10 @@ class Cart extends React.Component {
   };
 
   checkAllFieldsValid = (type) => {
-    const { paymentPageState } = this.state;
+    const { paymentPageState, quantity } = this.state;
     switch (type) {
       case "bag":
-        return this.getCartTotal() > 0;
+        return getCartTotal(quantity) > 0;
       case "shipping":
         let allFieldsComplete = true;
         // Object.values(this.state.shippingPageState).forEach(
