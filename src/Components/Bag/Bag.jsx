@@ -3,6 +3,7 @@ import style from "./Bag.module.css";
 import { PHOTOS } from "../../Photos/photos";
 import CartItem from "../CartItem/CartItem";
 import { formatToUSDCurrency } from "../../JS/functions";
+import { itemsArray } from "../../JS/constants";
 
 class Bag extends React.Component {
   render() {
@@ -10,14 +11,12 @@ class Bag extends React.Component {
       display,
       quantity,
       removeItem,
-      setCartItemsState,
-      cartItems,
       nestedStateObjectSetter,
     } = this.props;
 
     return (
       <div>
-        {cartItems.map(
+        {itemsArray.map(
           (item) =>
             display[item.product] === "visible" && (
               <CartItem
@@ -31,7 +30,6 @@ class Bag extends React.Component {
                     <p>{formatToUSDCurrency(item.price)}</p>
                   </div>
                 }
-                setCartItemsState={setCartItemsState}
                 cartItem={item.product}
                 price={item.price}
                 selectName="item-quantity"

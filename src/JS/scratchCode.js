@@ -33,15 +33,20 @@
 //           }}));
 //         }
 
-  // removeItem = (product) => {
-  //   this.setState({
-  //     display: {
-  //       ...this.state.display,
-  //       [product]: "none",
-  //     },
-  //     quantity: {
-  //       ...this.state.quantity,
-  //       [product]: 0,
-  //     },
-  //   });
-  // };
+// setCartItemsState = (cartItem) => {
+//   itemsArray.splice(
+//     itemsArray.findIndex((obj) => obj.product === cartItem),
+//     1
+//   );
+//   this.setState({
+//     cartItems: itemsArray,
+//     display: {
+//       ...this.state.display,
+//       [cartItem]: "none",
+//     },
+//     quantity: {
+//       ...this.state.quantity,
+//       [cartItem]: 0,
+//     },
+//   });
+// };

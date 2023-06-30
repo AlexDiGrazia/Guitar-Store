@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./Cart.module.css";
-import { itemsArray } from "../../JS/constants";
 import Bag from "../Bag/Bag";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
@@ -28,7 +27,6 @@ import {
 
 class Cart extends React.Component {
   state = {
-    cartItems: itemsArray,
     quantity: {
       guitar: 1,
       picks: 1,
@@ -141,20 +139,15 @@ class Cart extends React.Component {
     this.nestedStateObjectSetter("paymentPageState", "cardNumber", mask);
   };
 
-  setCartItemsState = (cartItem) => {
-    itemsArray.splice(
-      itemsArray.findIndex((obj) => obj.product === cartItem),
-      1
-    );
+  removeItem = (product) => {
     this.setState({
-      cartItems: itemsArray,
       display: {
         ...this.state.display,
-        [cartItem]: "none",
+        [product]: "none",
       },
       quantity: {
         ...this.state.quantity,
-        [cartItem]: 0,
+        [product]: 0,
       },
     });
   };
@@ -269,7 +262,6 @@ class Cart extends React.Component {
 
   render() {
     const {
-      cartItems,
       quantity,
       display,
       price,
@@ -292,11 +284,9 @@ class Cart extends React.Component {
     const componentsObject = {
       bag: (
         <Bag
-          cartItems={cartItems}
           display={display}
           quantity={quantity}
-          removeItem={(product) => this.removeItem(product)}
-          setCartItemsState={this.setCartItemsState}
+          removeItem={this.removeItem}
           nestedStateObjectSetter={this.nestedStateObjectSetter}
         />
       ),
@@ -355,6 +345,7 @@ class Cart extends React.Component {
               hiddenOrRevealed={hiddenOrRevealed}
               quantity={quantity}
               price={price}
+              display={display}
               discountPercentage={discountPercentage}
               shippingOption={shippingOption}
               buttonDirection={buttonDirection}
@@ -363,7 +354,6 @@ class Cart extends React.Component {
               setErrorMessage={this.setErrorMessage}
               checkAllFieldsValid={this.checkAllFieldsValid}
               progressBarIconStateSetter={this.progressBarIconStateSetter}
-              cartItems={cartItems}
               shippingPageState={shippingPageState}
               cardType={cardType}
               paymentPageState={paymentPageState}

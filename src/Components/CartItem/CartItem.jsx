@@ -20,7 +20,6 @@ class CartItem extends React.Component {
       quantity,
       removeItem,
       cartItem,
-      setCartItemsState,
       nestedStateObjectSetter,
     } = this.props;
     return (
@@ -28,7 +27,7 @@ class CartItem extends React.Component {
         <div className={style.imageAndInfo}>
           <div
             className={style.exit}
-            onClick={() => setCartItemsState(cartItem)}
+            onClick={removeItem}
           >
             X
           </div>

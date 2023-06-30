@@ -5,6 +5,7 @@ import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import ShippingSummaryInfo from "../ShippingSummaryInfo/ShippingSummaryInfo";
 import { PHOTOS } from "../../Photos/photos";
 import { CARDICON } from "../../JS/creditCard";
+import { itemsArray } from "../../JS/constants";
 import {
   formatToUSDCurrency,
   verifyNoErrors,
@@ -18,6 +19,7 @@ class Summary extends React.Component {
       hiddenOrRevealed,
       quantity,
       price,
+      display,
       discountPercentage,
       shippingOption,
       buttonDirection,
@@ -26,7 +28,6 @@ class Summary extends React.Component {
       setErrorMessage,
       checkAllFieldsValid,
       progressBarIconStateSetter,
-      cartItems,
       shippingPageState,
       cardType,
       paymentPageState,
@@ -120,27 +121,32 @@ class Summary extends React.Component {
         {/* Cart-Items container that appears if user clicks prompt */}
         <div className={hiddenOrRevealed.cartItems}>
           {screenOnDisplay !== "bag" &&
-            cartItems.map((item) => (
-              <div className={style.productWrapper}>
-                <div className={style.summaryImgWrapper}>
-                  <img
-                    src={PHOTOS[item.photo]}
-                    alt={item.alt}
-                    className={style.summaryPhotos}
-                  />
-                </div>
-                <div className={style.productText}>
-                  <h6>{item.headerSixText}</h6>
-                  <p>{item.paraText}</p>
-                  <div className={style.qtyAndPriceFlexContainer}>
-                    <p>{`Qty: ${quantity[item.product]}`}</p>
-                    <p>
-                      {formatToUSDCurrency(quantity[item.product] * item.price)}
-                    </p>
+            itemsArray.map(
+              (item) =>
+                display[item.product] === "visible" && (
+                  <div className={style.productWrapper}>
+                    <div className={style.summaryImgWrapper}>
+                      <img
+                        src={PHOTOS[item.photo]}
+                        alt={item.alt}
+                        className={style.summaryPhotos}
+                      />
+                    </div>
+                    <div className={style.productText}>
+                      <h6>{item.headerSixText}</h6>
+                      <p>{item.paraText}</p>
+                      <div className={style.qtyAndPriceFlexContainer}>
+                        <p>{`Qty: ${quantity[item.product]}`}</p>
+                        <p>
+                          {formatToUSDCurrency(
+                            quantity[item.product] * item.price
+                          )}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                )
+            )}
         </div>
 
         {/* Promo prompt and Input field*/}
@@ -264,10 +270,10 @@ class Summary extends React.Component {
                   screenOnDisplay,
                   "forward"
                 ),
-              handleState(
-                "screenOnDisplay",
-                buttonDirection[screenOnDisplay]["forward"]
-              ));
+                handleState(
+                  "screenOnDisplay",
+                  buttonDirection[screenOnDisplay]["forward"]
+                ));
             }}
             onBlur={() => handleState("allFieldsValidError", "")}
             value={
