@@ -15,7 +15,7 @@ class Confirmation extends React.Component {
       {
         text: "BACK TO HOMEPAGE",
         className: style.backToHomePage,
-        onClick: (e) => nextPage('home-page'),
+        onClick: (e) => nextPage('homePage'),
       },
     ];
 

@@ -1,5 +1,4 @@
 import React from "react";
-import style from "./Bag.module.css";
 import { PHOTOS } from "../../Photos/photos";
 import CartItem from "../CartItem/CartItem";
 import { formatToUSDCurrency } from "../../JS/functions";

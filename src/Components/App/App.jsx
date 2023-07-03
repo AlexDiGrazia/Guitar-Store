@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./App.module.css";
 import HomePage from "../HomePage/HomePage";
-import Cart from "../Cart/Cart";
+import Dashboard from "../Dashboard/Dashboard";
 import "../Main/index.css";
 
 
@@ -17,7 +17,7 @@ class App extends React.Component {
   render() {
     const componentsObject = {
       homePage: <HomePage nextPage={this.nextPage} />,
-      cart: <Cart nextPage={this.nextPage} />,
+      dashboard: <Dashboard nextPage={this.nextPage} />,
     };
 
     return (

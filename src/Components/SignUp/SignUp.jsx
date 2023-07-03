@@ -204,7 +204,7 @@ class SignUp extends React.Component {
                 ? ''
                 : 'Please correctly complete all fields';
             saveAccount 
-              ? this.props.nextPage("cart")
+              ? this.props.nextPage("dashboard")
               : this.setState((prevState) => ({
                 error: {
                   ...prevState.error,

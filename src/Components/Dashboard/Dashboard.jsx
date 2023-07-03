@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Cart.module.css";
+import style from "./Dashboard.module.css";
 import Bag from "../Bag/Bag";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
@@ -25,7 +25,7 @@ import {
   securityCodeValidation,
 } from "../../JS/creditCard";
 
-class Cart extends React.Component {
+class Dashboard extends React.Component {
   state = {
     quantity: {
       guitar: 1,
@@ -368,4 +368,4 @@ class Cart extends React.Component {
   }
 }
 
-export default Cart;
+export default Dashboard;

@@ -59,7 +59,7 @@ class Login extends React.Component {
             // password === userData.password &&
             // user === userData.username || user === userData.email
             true
-              ? this.props.nextPage('cart')
+              ? this.props.nextPage('dashboard')
               : this.setState(
                 user !== '' && password !==''
                 ? { errorMessage: 'Username/email and Password do not match.' }
