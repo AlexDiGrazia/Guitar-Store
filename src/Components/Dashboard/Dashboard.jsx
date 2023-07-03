@@ -53,19 +53,18 @@ class Dashboard extends React.Component {
     promoCode: "",
     screenOnDisplay: "cart",
     shippingOption: "free",
-    totalCartPrice: "$5,000",
     shippingPageState: {
-      addressTitle: "residential",
-      fullName: "John Doe",
-      streetAddress: "57335 Seneca Valley Rd.",
-      zipcode: "32577",
-      cellPhoneAreaCode: "935",
-      cellPhoneNumber: "785 - 2334",
+      addressTitle: "",
+      fullName: "",
+      streetAddress: "",
+      zipcode: "",
+      cellPhoneAreaCode: "",
+      cellPhoneNumber: "",
       teleAreaCode: "",
       telephoneNumber: "",
-      country: "USA",
-      state: "Rhode Island",
-      city: "Arberita",
+      country: "",
+      state: "",
+      city: "",
     },
     paymentPageState: {
       cardholderName: "",
@@ -248,10 +247,10 @@ class Dashboard extends React.Component {
         return getCartTotal(quantity) > 0;
       case "shipping":
         let allFieldsComplete = true;
-        // Object.values(this.state.shippingPageState).forEach(
-        //   (value) =>
-        //     (allFieldsComplete = value.length === 0 ? false : allFieldsComplete)
-        // );
+        Object.values(this.state.shippingPageState).forEach(
+          (value) =>
+            (allFieldsComplete = value.length === 0 ? false : allFieldsComplete)
+        );
         return allFieldsComplete;
       case "payment":
         return verifyAllFieldsComplete(paymentPageState);

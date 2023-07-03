@@ -55,9 +55,8 @@ class Login extends React.Component {
           type="button"
           className={style.button}
           onClick={() => {
-            // password === userData.password &&
-            // user === userData.username || user === userData.email
-            true
+            password === userData.password &&
+            user === userData.username || user === userData.email
               ? this.props.nextPage("dashboard")
               : this.setState(
                   user !== "" && password !== ""
