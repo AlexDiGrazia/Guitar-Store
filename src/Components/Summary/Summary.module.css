@@ -174,3 +174,16 @@ p {
   width: 106%;
 }
 
+@media (min-width: 1440px) {
+  .flexRow p {
+    font-size: 14px;
+    margin: 6px 0 6px 22px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .flexRow p {
+    font-size: 14px;
+    margin: 6px 0 6px 30px;
+  }
+}

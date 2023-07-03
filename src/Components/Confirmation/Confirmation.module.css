@@ -57,5 +57,8 @@
   color: black;
 }
 
-
-
+@media (max-width: 1440px) {
+  .background {
+    width: 556px;
+  }
+}
