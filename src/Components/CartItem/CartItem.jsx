@@ -1,34 +1,24 @@
 import React from "react";
 import style from "./CartItem.module.css";
 import { formatToUSDCurrency } from "../../JS/functions";
-import { itemsArray } from "../../JS/constants";
 
 class CartItem extends React.Component {
   render() {
     const {
       description,
       price,
-      totalPrice,
       src,
       alt,
       selectName,
       selectId,
-      productHeader,
-      priceHeader,
-      imgClassName,
-      // selectorOnChange,
       quantity,
       removeItem,
-      cartItem,
       nestedStateObjectSetter,
     } = this.props;
     return (
       <div className={style.item}>
         <div className={style.imageAndInfo}>
-          <div
-            className={style.exit}
-            onClick={removeItem}
-          >
+          <div className={style.exit} onClick={removeItem}>
             X
           </div>
           <div className={style.imgWrapper}>

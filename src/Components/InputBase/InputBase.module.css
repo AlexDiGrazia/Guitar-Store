@@ -18,12 +18,12 @@
 }
 
 .input::placeholder {
-  font-size: .625rem;
-  color:#c1bbbbe7;
+  font-size: 0.625rem;
+  color: #c1bbbbe7;
 }
 
 .label {
-  font-size: .625rem;
+  font-size: 0.625rem;
   font-weight: 900;
   margin-top: 0px;
 }

@@ -23,12 +23,6 @@ class Shipping extends React.Component {
     ));
   };
 
-  // mapPhoneInputs = (array) => {
-  //   return array.map((obj) => (
-  //     <div className={style.flex}>{obj.map((item) => mapInputBase(item))}</div>
-  //   ));
-  // };
-
   handleChange = (e, value) => {
     this.setState((prev) => ({
       allFields: {
@@ -39,11 +33,8 @@ class Shipping extends React.Component {
   };
 
   render() {
-    const {
-      handleState,
-      nestedStateObjectSetter,
-      shippingPageState,
-    } = this.props;
+    const { handleState, nestedStateObjectSetter, shippingPageState } =
+      this.props;
 
     const inputsArray = [
       {

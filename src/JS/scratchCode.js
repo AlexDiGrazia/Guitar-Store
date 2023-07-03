@@ -50,3 +50,9 @@
 //     },
 //   });
 // };
+
+  // mapPhoneInputs = (array) => {
+  //   return array.map((obj) => (
+  //     <div className={style.flex}>{obj.map((item) => mapInputBase(item))}</div>
+  //   ));
+  // };

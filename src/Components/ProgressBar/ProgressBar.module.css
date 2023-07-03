@@ -27,7 +27,6 @@
 
 .circle {
   border-radius: 50%;
-  /* background: #a2a1a1; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,5 +68,3 @@
   margin-bottom: 21px;
   box-shadow: 0 0 15px -2px #0000004a;
 }
-
-

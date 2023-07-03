@@ -19,7 +19,7 @@ class InputBase extends React.Component {
       inputBaseClass,
       shortDiv,
       maxLength,
-      noMarginBottom
+      noMarginBottom,
     } = this.props;
     return (
       <div className={`${inputBaseClass} ${shortDiv} ${noMarginBottom}`}>

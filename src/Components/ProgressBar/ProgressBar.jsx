@@ -2,7 +2,6 @@ import React from "react";
 import style from "./ProgressBar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 class ProgressBar extends React.Component {
   render() {
     const { progressBarIcons } = this.props;

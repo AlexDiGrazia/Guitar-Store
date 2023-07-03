@@ -5,7 +5,7 @@ import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
 class Confirmation extends React.Component {
   render() {
-    const { nextPage } = this.props
+    const { nextPage } = this.props;
 
     const buttons = [
       {
@@ -15,7 +15,7 @@ class Confirmation extends React.Component {
       {
         text: "BACK TO HOMEPAGE",
         className: style.backToHomePage,
-        onClick: (e) => nextPage('homePage'),
+        onClick: (e) => nextPage("homePage"),
       },
     ];
 

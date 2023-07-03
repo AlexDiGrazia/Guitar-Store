@@ -125,9 +125,8 @@ class Dashboard extends React.Component {
 
   setHiddenOrRevealedState = (key) => {
     const { hiddenOrRevealed } = this.state;
-    let display = hiddenOrRevealed[key] === style.hidden 
-      ? style.reveal 
-      : style.hidden;
+    let display =
+      hiddenOrRevealed[key] === style.hidden ? style.reveal : style.hidden;
     this.nestedStateObjectSetter("hiddenOrRevealed", key, display);
   };
 

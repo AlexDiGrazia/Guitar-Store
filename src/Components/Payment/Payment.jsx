@@ -4,21 +4,12 @@ import InputBase from "../InputBase/InputBase";
 import Select from "../Select/Select";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleQuestion, faDisplay } from "@fortawesome/free-solid-svg-icons";
-import {
-  cardNumberValidation,
-  OTHERCARDS,
-  securityCodeValidation,
-  CARD,
-  CARDICON,
-  findDebitCardType,
-} from "../../JS/creditCard";
-
-// import inputBaseStyle from "../InputBase/InputBase.module.css"
+import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import { OTHERCARDS, CARD, CARDICON } from "../../JS/creditCard";
 
 class Payment extends React.Component {
   mapInputBase = (array) => {
-    const { error, cardType, cvvInfo } = this.props;
+    const { error, cardType } = this.props;
 
     return array.map((obj) => (
       <div className={style.relative}>
@@ -58,7 +49,6 @@ class Payment extends React.Component {
       nestedStateObjectSetter,
       handleBlur,
       error,
-      cardType,
       cvvInfo,
       handleState,
     } = this.props;

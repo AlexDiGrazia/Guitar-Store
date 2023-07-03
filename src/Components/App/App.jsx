@@ -4,7 +4,6 @@ import HomePage from "../HomePage/HomePage";
 import Dashboard from "../Dashboard/Dashboard";
 import "../Main/index.css";
 
-
 class App extends React.Component {
   state = {
     currentPage: "homePage",
@@ -20,13 +19,8 @@ class App extends React.Component {
       dashboard: <Dashboard nextPage={this.nextPage} />,
     };
 
-    return (
-      <div>
-        {componentsObject[this.state.currentPage]}
-      </div>
-    );
+    return <div>{componentsObject[this.state.currentPage]}</div>;
   }
 }
 
 export default App;
-

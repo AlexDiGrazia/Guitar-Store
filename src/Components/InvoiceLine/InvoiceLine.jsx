@@ -1,15 +1,15 @@
 import React from "react";
-import style from "./InvoiceLine.module.css"
+import style from "./InvoiceLine.module.css";
 
 class InvoiceLine extends React.Component {
   render() {
     const { name, price } = this.props;
-    return(
+    return (
       <div className={style.lineItem}>
         <p>{name}</p>
         <p>{price}</p>
       </div>
-    )
+    );
   }
 }
 

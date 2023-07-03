@@ -24,7 +24,6 @@
 .imageAndInfo {
   display: flex;
   align-items: center;
-
 }
 
 .numbers {
@@ -40,8 +39,7 @@
 .quantity {
   font-size: 12px;
   border: 2px solid #858585;
-  /* background-color: #b66565; */
-  background-color: #3B3B3B;
+  background-color: #3b3b3b;
   padding: 3px 0px 3px 5px;
   border-radius: 3px;
   max-width: fit-content;
@@ -49,8 +47,7 @@
 
 .selector {
   border: none;
-  /* background-color: #b66565; */
-  background-color: #3B3B3B;
+  background-color: #3b3b3b;
 }
 
 div .totalPrice {
@@ -68,4 +65,4 @@ div .totalPrice {
 
 .description p {
   font-size: 15px;
-} 
+}

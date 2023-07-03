@@ -6,12 +6,8 @@ import { itemsArray } from "../../JS/constants";
 
 class Cart extends React.Component {
   render() {
-    const {
-      display,
-      quantity,
-      removeItem,
-      nestedStateObjectSetter,
-    } = this.props;
+    const { display, quantity, removeItem, nestedStateObjectSetter } =
+      this.props;
 
     return (
       <div>

@@ -36,8 +36,8 @@
 
 .label {
   display: inline-block;
-  margin-right: 20px; 
-  width: 75px; 
+  margin-right: 20px;
+  width: 75px;
 }
 
 .inputBaseClass {
@@ -52,9 +52,11 @@ div.jurisdiction {
   display: flex;
 }
 
-.shortDiv { width: 200px;}
+.shortDiv {
+  width: 200px;
+}
 
-.flex { 
+.flex {
   display: flex;
   align-items: center;
 }

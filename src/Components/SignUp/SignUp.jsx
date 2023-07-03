@@ -28,7 +28,7 @@ class SignUp extends React.Component {
     this.setState({ hiddenOrVisible: arg[0], eyeOpenOrClosed: arg[1] });
   };
 
-   handleValidations = (type, value) => {
+  handleValidations = (type) => {
     const { password, confirmPassword, firstName, lastName, zipCode } =
       this.state;
     const { userData } = this.props;
@@ -190,34 +190,42 @@ class SignUp extends React.Component {
             ))
           : null}
 
-        {(error.saveAccount && error.saveAccount.length) && (<p className={style.error}>{error.saveAccount}</p>)}
+        {error.saveAccount && error.saveAccount.length && (
+          <p className={style.error}>{error.saveAccount}</p>
+        )}
 
         <input
           type="button"
           className={`${style.button} ${style.red}`}
           onClick={() => {
             let saveAccount = true;
-            Object.values(error).forEach((value) => saveAccount = value.length ? false : saveAccount)
-            Object.values(this.state).forEach((value) => saveAccount = value.length === 0 ? false : saveAccount)
-            let errorMessage = 
-              saveAccount 
-                ? ''
-                : 'Please correctly complete all fields';
-            saveAccount 
+            Object.values(error).forEach(
+              (value) => (saveAccount = value.length ? false : saveAccount)
+            );
+            Object.values(this.state).forEach(
+              (value) =>
+                (saveAccount = value.length === 0 ? false : saveAccount)
+            );
+            let errorMessage = saveAccount
+              ? ""
+              : "Please correctly complete all fields";
+            saveAccount
               ? this.props.nextPage("dashboard")
               : this.setState((prevState) => ({
-                error: {
-                  ...prevState.error,
-                  saveAccount: errorMessage 
-                }
-              }))
+                  error: {
+                    ...prevState.error,
+                    saveAccount: errorMessage,
+                  },
+                }));
           }}
-          onBlur={() => this.setState((prevState) => ({
-            error: {
-              ...prevState.error,
-              saveAccount: ''
-            }
-          }))}
+          onBlur={() =>
+            this.setState((prevState) => ({
+              error: {
+                ...prevState.error,
+                saveAccount: "",
+              },
+            }))
+          }
           value="SAVE"
         />
         <div>
