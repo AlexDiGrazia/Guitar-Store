@@ -836,7 +836,7 @@ export const halfArray = [
 ];
 
 export const buttonDirection = {
-  bag: {
+  cart: {
     next: "CHECKOUT",
     back: "BACK TO HOME",
     forward: "shipping",
@@ -845,7 +845,7 @@ export const buttonDirection = {
     next: "CHECKOUT",
     back: "BACK TO CART",
     forward: "payment",
-    backward: "bag",
+    backward: "cart",
   },
   payment: {
     next: null,

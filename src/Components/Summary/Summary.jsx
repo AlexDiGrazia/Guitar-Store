@@ -104,7 +104,7 @@ class Summary extends React.Component {
         <h2 className={style.summary}>Summary</h2>
 
         {/* Prompt to Reveal Cart items */}
-        {screenOnDisplay !== "bag" && (
+        {screenOnDisplay !== "cart" && (
           <p
             className={style.seeCartItems}
             style={{
@@ -120,7 +120,7 @@ class Summary extends React.Component {
 
         {/* Cart-Items container that appears if user clicks prompt */}
         <div className={hiddenOrRevealed.cartItems}>
-          {screenOnDisplay !== "bag" &&
+          {screenOnDisplay !== "cart" &&
             itemsArray.map(
               (item) =>
                 display[item.product] === "visible" && (

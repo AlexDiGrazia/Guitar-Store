@@ -4,7 +4,7 @@ import CartItem from "../CartItem/CartItem";
 import { formatToUSDCurrency } from "../../JS/functions";
 import { itemsArray } from "../../JS/constants";
 
-class Bag extends React.Component {
+class Cart extends React.Component {
   render() {
     const {
       display,
@@ -51,4 +51,4 @@ class Bag extends React.Component {
   }
 }
 
-export default Bag;
+export default Cart;

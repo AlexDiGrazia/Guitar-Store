@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Dashboard.module.css";
-import Bag from "../Bag/Bag";
+import Cart from "../Cart/Cart";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
 import Confirmation from "../Confirmation/Confirmation";
@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
     allFieldsValidError: "",
     discountPercentage: "",
     promoCode: "",
-    screenOnDisplay: "bag",
+    screenOnDisplay: "cart",
     shippingOption: "free",
     totalCartPrice: "$5,000",
     shippingPageState: {
@@ -78,7 +78,7 @@ class Dashboard extends React.Component {
     cvvInfo: "displayNone",
     cardType: "",
     progressBarIcons: {
-      bag: {
+      cart: {
         innerColor: style.white,
         circle: style.red,
         icon: faCartShopping,
@@ -153,9 +153,9 @@ class Dashboard extends React.Component {
   };
 
   progressBarIconStateSetter = (page, bar, direction) => {
-    const { progressBarIcons, screenOnDisplay } = this.state;
+    const { progressBarIcons } = this.state;
     const icons = {
-      bag: faCartShopping,
+      cart: faCartShopping,
       shipping: faTruck,
       payment: faCreditCard,
       confirmation: faThumbsUp,
@@ -222,7 +222,7 @@ class Dashboard extends React.Component {
     const { paymentPageState, error, quantity } = this.state;
     let errorMessage;
     switch (type) {
-      case "bag":
+      case "cart":
         errorMessage = getCartTotal(quantity) === 0 && "No items in cart";
         break;
       case "shipping":
@@ -245,7 +245,7 @@ class Dashboard extends React.Component {
   checkAllFieldsValid = (type) => {
     const { paymentPageState, quantity } = this.state;
     switch (type) {
-      case "bag":
+      case "cart":
         return getCartTotal(quantity) > 0;
       case "shipping":
         let allFieldsComplete = true;
@@ -282,8 +282,8 @@ class Dashboard extends React.Component {
     const { nextPage } = this.props;
 
     const componentsObject = {
-      bag: (
-        <Bag
+      cart: (
+        <Cart
           display={display}
           quantity={quantity}
           removeItem={this.removeItem}
@@ -319,7 +319,7 @@ class Dashboard extends React.Component {
             className={style.returnHome}
             type="button"
             onClick={() => {
-              if (screenOnDisplay === "bag") {
+              if (screenOnDisplay === "cart") {
                 nextPage("homePage");
               } else {
                 this.progressBarIconStateSetter(

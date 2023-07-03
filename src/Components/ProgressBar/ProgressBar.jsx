@@ -10,8 +10,8 @@ class ProgressBar extends React.Component {
       {
         text: "Cart",
         bool: true,
-        fontAwesome: progressBarIcons["bag"]["icon"],
-        value: "bag",
+        fontAwesome: progressBarIcons["cart"]["icon"],
+        value: "cart",
       },
       {
         text: "Shipping",
