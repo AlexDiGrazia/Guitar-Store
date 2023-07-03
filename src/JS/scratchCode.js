@@ -5,16 +5,15 @@
 //   confirmPassword: 'Password and Confirmation Password must match',
 // }}))
 
-// this.state.error.confirmPassword 
+// this.state.error.confirmPassword
 // && this.state.password === this.state.confirmPassword
 // && this.setState((prevState) => ({ error: {
 //   ...prevState.error,
 //   confirmPassword: '',
 // }}))
 
-
 // const passwordsMatch =  this.state.password === this.state.confirmPassword
-//         const isErrorMessagePresent = 
+//         const isErrorMessagePresent =
 //           this.state.error.confirmPassword
 //           &&  this.state.error.confirmPassword.length
 
@@ -26,7 +25,7 @@
 //           }})) : null;
 //         } else {
 //           isErrorMessagePresent
-//           ? null 
+//           ? null
 //           : this.setState((prevState) => ({ error: {
 //             ...prevState.error,
 //             confirmPassword: 'Password and Confirmation Password must match',
@@ -51,8 +50,8 @@
 //   });
 // };
 
-  // mapPhoneInputs = (array) => {
-  //   return array.map((obj) => (
-  //     <div className={style.flex}>{obj.map((item) => mapInputBase(item))}</div>
-  //   ));
-  // };
+// mapPhoneInputs = (array) => {
+//   return array.map((obj) => (
+//     <div className={style.flex}>{obj.map((item) => mapInputBase(item))}</div>
+//   ));
+// };

@@ -111,7 +111,6 @@ export const onlyTextValidation = (value) => {
 export const securityCodeValidation = (min, value) =>
   value && value.length < min ? "Must be 3 characters or more" : "";
 
-
 export const findDebitCardType = (cardNumber) => {
   const regexPattern = {
     MASTERCARD: /^5[1-5][0-9]{1,}|^2[2-7][0-9]{1,}$/,

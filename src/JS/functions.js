@@ -21,7 +21,7 @@ export const formatPhoneNumber = (e) => {
       return mask;
     }
   }
-  return mask
+  return mask;
 };
 
 export const verifyAllFieldsComplete = (stateObj) => {
