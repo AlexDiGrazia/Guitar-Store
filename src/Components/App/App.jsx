@@ -6,7 +6,7 @@ import "../Main/index.css";
 
 class App extends React.Component {
   state = {
-    currentPage: "homePage",
+    currentPage: "dashboard",
   };
 
   nextPage = (page) => {
