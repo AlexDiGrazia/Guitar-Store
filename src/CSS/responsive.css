@@ -1,0 +1,5 @@
+@media screen and (max-width: 886px) {
+  .flexContainer {
+    flex-wrap: wrap;
+  }
+}

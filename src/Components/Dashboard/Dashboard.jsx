@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Dashboard.module.css";
+import "../../CSS/responsive.css";
 import Cart from "../Cart/Cart";
 import Shipping from "../Shipping/Shipping";
 import Payment from "../Payment/Payment";
